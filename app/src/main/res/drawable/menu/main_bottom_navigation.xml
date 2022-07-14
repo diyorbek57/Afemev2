@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/nav_home_selector"
+        android:title="" />
+
+    <item
+        android:id="@+id/nav_search"
+        android:icon="@drawable/nav_search_selector"
+        android:title="" />
+    <item
+        android:id="@+id/nav_add_not_use"
+        android:title="" />
+    <item
+        android:id="@+id/nav_chat"
+        android:icon="@drawable/nav_chat_selector"
+        android:title="" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/nav_profile_selector"
+        android:title="" />
+
+</menu>
