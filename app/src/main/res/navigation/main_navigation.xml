@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/nav_search"
-        android:name="com.ayizor.afemev2.fragment.SearchFragment"
+        android:name="com.ayizor.afeme.fragment.SearchFragment"
         android:label="Search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/nav_favorites"
-        android:name="com.ayizor.afemev2.fragment.FavoritesFragment"
+        android:name="com.ayizor.afeme.fragment.FavoritesFragment"
         android:label="Favorites"
         tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/nav_services"
-        android:name="com.ayizor.afemev2.fragment.ServicesFragment"
+        android:name="com.ayizor.afeme.fragment.ServicesFragment"
         android:label="Services"
         tools:layout="@layout/fragment_services" />
     <fragment
         android:id="@+id/nav_chat"
-        android:name="com.ayizor.afemev2.fragment.ChatFragment"
+        android:name="com.ayizor.afeme.fragment.ChatFragment"
         android:label="Chat"
         tools:layout="@layout/fragment_chat" />
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.ayizor.afemev2.fragment.ProfileFragment"
+        android:name="com.ayizor.afeme.fragment.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

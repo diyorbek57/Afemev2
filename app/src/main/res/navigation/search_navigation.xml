@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search_fragment_navigation"
+    >
+<!--    <fragment-->
+<!--        android:id="@+id/nav_list"-->
+<!--        android:name="com.ayizor.afeme.fragment.searchfragment.ListFragment"-->
+<!--        android:label="Search"-->
+<!--        tools:layout="@layout/fragment_list">-->
+<!--        <action-->
+<!--            android:id="@+id/action_nav_list_to_nav_map"-->
+<!--            app:destination="@id/nav_map" />-->
+<!--    </fragment>-->
+<!--    <fragment-->
+<!--        android:id="@+id/nav_map"-->
+<!--        android:name="com.ayizor.afeme.fragment.searchfragment.MapFragment"-->
+<!--        android:label="Search"-->
+<!--        tools:layout="@layout/fragment_map">-->
+<!--        <action-->
+<!--            android:id="@+id/action_nav_map_to_nav_list"-->
+<!--            app:destination="@id/nav_list" />-->
+<!--    </fragment>-->
+</navigation>
