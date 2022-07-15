@@ -73,5 +73,13 @@ class PrefsManager(context: Context) {
         val type = object : TypeToken<LatLng>() {}.type
         return gson.fromJson(json, type)
     }
+    fun storeSearchFragment(fragment_name: String) {
+        val prefsEditor = sharedPreferences!!.edit()
+        prefsEditor.putString("search_fragment", fragment_name)
+        prefsEditor.apply()
+    }
 
+    fun loadSearchFragment(): String? {
+        return sharedPreferences!!.getString("search_fragment", "")
+    }
 }

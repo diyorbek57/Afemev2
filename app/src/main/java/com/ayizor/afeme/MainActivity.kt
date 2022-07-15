@@ -5,16 +5,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.ayizor.afeme.databinding.ActivityMainBinding
+import com.ayizor.afeme.databinding.FragmentSearchBinding
 
 
 class MainActivity : AppCompatActivity() {
 
-
+    lateinit var binding: ActivityMainBinding
+    val TAG: String = MainActivity::class.java.simpleName
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_main)
-
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setupNavigation()
         inits()
     }
 
@@ -23,11 +25,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    private fun setupNavigation() {
-//        val navHostFragment = supportFragmentManager
-//            .findFragmentById(binding.navHostFragment.id) as NavHostFragment
-//        val navController = navHostFragment.navController
-//
-//        binding.bottomNavView.setupWithNavController(navController)
-//    }
+    private fun setupNavigation() {
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(binding.navHostFragment.id) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        binding.bottomNavView.setupWithNavController(navController)
+    }
 }

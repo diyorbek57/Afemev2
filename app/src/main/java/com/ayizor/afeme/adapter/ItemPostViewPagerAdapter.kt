@@ -5,12 +5,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ayizor.afeme.model.post.GetPost
 import com.ayizor.afeme.databinding.ItemMainPostViewPagerBinding
+import com.ayizor.afeme.model.inmodels.Image
+import com.ayizor.afeme.model.post.GetPost
+import com.bumptech.glide.Glide
 
 
 class ItemPostViewPagerAdapter(
-    val operatorArrayList: ArrayList<GetPost>,
+    val postsList: ArrayList<Image>,
     val context: Context
 ) :
     RecyclerView.Adapter<ItemPostViewPagerAdapter.ItemPostViewPagerViewHolder>() {
@@ -24,14 +26,23 @@ class ItemPostViewPagerAdapter(
 
     override fun onBindViewHolder(holder: ItemPostViewPagerViewHolder, position: Int) {
 
+        with(holder) {
+            with(postsList[position]) {
+                    Glide.with(context)
+                        .load(image_url)
+                        .into(binding.ivViewpager)
+            }
+        }
+
 
     }
 
     override fun getItemCount(): Int {
-        return operatorArrayList.size
+        return postsList.size
     }
 
-    inner class ItemPostViewPagerViewHolder(val binding: ItemMainPostViewPagerBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ItemPostViewPagerViewHolder(val binding: ItemMainPostViewPagerBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     interface OnViewPagerItemClickListener {
         fun onViewPagerItemClickListener(id: Int)

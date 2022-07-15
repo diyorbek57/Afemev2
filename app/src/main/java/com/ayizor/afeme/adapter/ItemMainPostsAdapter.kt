@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import com.ayizor.afeme.model.post.GetPost
+import androidx.viewpager2.widget.ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
 import com.ayizor.afeme.databinding.ItemMainPostBinding
+import com.ayizor.afeme.model.inmodels.Image
+import com.ayizor.afeme.model.post.GetPost
 import kotlin.math.abs
 
 
@@ -23,8 +25,8 @@ class ItemMainPostsAdapter(
 
     val TAG: String = ItemMainPostsAdapter::class.java.simpleName
     private lateinit var binding: ItemMainPostBinding
-    private val viewPager: ViewPager2? = null
-    private val adapter: ItemPostViewPagerAdapter? = null
+    private var viewPager: ViewPager2? = null
+    private var adapter: ItemPostViewPagerAdapter? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         binding = ItemMainPostBinding.inflate(LayoutInflater.from(context), parent, false)
@@ -35,34 +37,40 @@ class ItemMainPostsAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-       inits()
+
         with(holder) {
             with(postsList[position]) {
-                post_images?.let { viewPager?.setOffscreenPageLimit(it.size) };
 
+                binding.tvPrice.text = post_price_usd
+
+                if (post_images != null) {
+                    setupViewPager(post_images)
+                }
             }
 
         }
 
     }
 
-    private fun inits() {
-       setupViewPager()
-    }
 
-    private fun setupViewPager() {
+    private fun setupViewPager(postsList: ArrayList<Image>) {
+        adapter = ItemPostViewPagerAdapter(postsList, context)
+        viewPager = binding.viewpager
+        viewPager?.offscreenPageLimit = 3
         viewPager!!.adapter = adapter
-        viewPager.clipToPadding = false
-        viewPager.clipChildren = false
-        viewPager.getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
+        viewPager!!.clipToPadding = false
+        viewPager!!.clipChildren = false
+        viewPager!!.getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
         val transformer = CompositePageTransformer()
 
-        transformer.addTransformer(MarginPageTransformer(5))
+        transformer.addTransformer(MarginPageTransformer(30))
+
         transformer.addTransformer { page, position ->
-            val v = 1 - abs(position)
-            page.scaleY = 0.8f + v * 0.2f
+            //val v = 1 - abs(position)
+
+
         }
-        viewPager.setPageTransformer(transformer)
+        viewPager!!.setPageTransformer(transformer)
 
     }
 
@@ -72,7 +80,8 @@ class ItemMainPostsAdapter(
     }
 
 
-    inner class ItemMainPostViewHolder(val binding: ItemMainPostBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ItemMainPostViewHolder(val binding: ItemMainPostBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     interface OnPostItemClickListener {
         fun onPostItemClickListener(id: Int, latitude: String, longitude: String)

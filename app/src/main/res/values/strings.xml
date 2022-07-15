@@ -13,4 +13,6 @@
     <string name="search">Search</string>
     <string name="chat">Chat</string>
     <string name="profile">Profile</string>
+    <string name="list">List</string>
+    <string name="sorting">Sorting:</string>
 </resources>
