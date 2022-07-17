@@ -9,17 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import androidx.viewpager2.widget.ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
 import com.ayizor.afeme.databinding.ItemMainPostBinding
 import com.ayizor.afeme.model.inmodels.Image
 import com.ayizor.afeme.model.post.GetPost
-import kotlin.math.abs
 
 
 class ItemMainPostsAdapter(
     var context: Context,
     var postsList: ArrayList<GetPost>,
-    private val onPostItemClickListener: OnPostItemClickListener
+    private val onPostItemClickListener: OnPostItemClickListener,
+    private val onActionsButtonClickListener: OnActionsButtonClickListener
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -45,6 +44,30 @@ class ItemMainPostsAdapter(
 
                 if (post_images != null) {
                     setupViewPager(post_images)
+                }
+
+
+
+
+                //post click listener
+                binding.llMain.setOnClickListener {
+                    if (post_id != null) {
+                        if (post_latitude != null) {
+                            if (post_longitude != null) {
+                                onPostItemClickListener.onPostItemClickListener(
+                                    post_id,
+                                    post_latitude,
+                                    post_longitude
+                                )
+                            }
+                        }
+                    }
+                }
+                //actions bottomsheet click listener
+                binding.btnMore.setOnClickListener {
+                    if (post_id != null) {
+                        onActionsButtonClickListener.onActionsButtonClickListener(post_id)
+                    }
                 }
             }
 
@@ -85,6 +108,10 @@ class ItemMainPostsAdapter(
 
     interface OnPostItemClickListener {
         fun onPostItemClickListener(id: Int, latitude: String, longitude: String)
+    }
+
+    interface OnActionsButtonClickListener {
+        fun onActionsButtonClickListener(id: Int)
     }
 }
 

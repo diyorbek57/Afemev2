@@ -15,4 +15,26 @@
     <string name="profile">Profile</string>
     <string name="list">List</string>
     <string name="sorting">Sorting:</string>
+    <string name="offers">Offers</string>
+    <string name="subscriptions">Subscriptions</string>
+    <string name="edit">Edit</string>
+    <string name="title_activity_intro">IntroActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="we_find_and_check_tenants">We find and check tenants</string>
+    <string name="and_we_will_also_insure_the_apartment_and_help_in_everyday_life">And we will also insure the apartment and help in everyday life.</string>
+    <string name="all_this_is_free">All this is — free.</string>
+    <string name="thanks_next_time">Thanks, next time</string>
+    <string name="i_want_to_know_more">I want to know more</string>
+    <string name="share">Share</string>
+    <string name="write_a_note">Write a note</string>
+    <string name="complain_about_the_ad">Complain about the ad</string>
+    <string name="hide_ad">Hide ad</string>
+    <string name="actions">Actions</string>
 </resources>

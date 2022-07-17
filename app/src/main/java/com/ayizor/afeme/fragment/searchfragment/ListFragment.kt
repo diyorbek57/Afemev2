@@ -7,17 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ayizor.afeme.R
 import com.ayizor.afeme.adapter.ItemMainPostsAdapter
 import com.ayizor.afeme.api.main.ApiInterface
 import com.ayizor.afeme.api.main.Client
 import com.ayizor.afeme.databinding.FragmentListBinding
+import com.ayizor.afeme.databinding.ItemMainPostMoreBinding
 import com.ayizor.afeme.model.post.GetPost
 import com.ayizor.afeme.model.response.GetPostResponse
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ListFragment : Fragment(), ItemMainPostsAdapter.OnPostItemClickListener {
+class ListFragment : Fragment(), ItemMainPostsAdapter.OnPostItemClickListener,
+    ItemMainPostsAdapter.OnActionsButtonClickListener {
 
     lateinit var binding: FragmentListBinding
     val TAG: String = ListFragment::class.java.simpleName
@@ -44,13 +48,18 @@ class ListFragment : Fragment(), ItemMainPostsAdapter.OnPostItemClickListener {
     }
 
     private fun refreshPostsAdapter(filters: ArrayList<GetPost>) {
-        val adapter = ItemMainPostsAdapter(requireContext(), filters, this)
+        val adapter =
+            activity?.let { ItemMainPostsAdapter(it.applicationContext, filters, this, this) }
         binding.rvPosts.adapter = adapter
 
     }
 
     override fun onPostItemClickListener(id: Int, latitude: String, longitude: String) {
 
+    }
+
+    override fun onActionsButtonClickListener(id: Int) {
+        showSettingsBottomsheet(id)
     }
 
     private fun getPosts() {
@@ -76,4 +85,29 @@ class ListFragment : Fragment(), ItemMainPostsAdapter.OnPostItemClickListener {
 
     }
 
+    fun showSettingsBottomsheet(post_id: Int) {
+        val sheetDialog = BottomSheetDialog(requireContext(), R.style.AppBottomSheetDialogTheme)
+        val bottomSheetBinding: ItemMainPostMoreBinding =
+            ItemMainPostMoreBinding.inflate(layoutInflater)
+        sheetDialog.setContentView(bottomSheetBinding.root)
+
+
+        bottomSheetBinding.llBsNote.setOnClickListener {
+
+        }
+        bottomSheetBinding.llBsShare.setOnClickListener {
+
+        }
+        bottomSheetBinding.llBsReport.setOnClickListener {
+
+        }
+        bottomSheetBinding.llBsHidePost.setOnClickListener {
+
+        }
+        bottomSheetBinding.ivBsClose.setOnClickListener {
+            sheetDialog.dismiss()
+        }
+        sheetDialog.show();
+        sheetDialog.window?.attributes?.windowAnimations = R.style.DialogAnimaton;
+    }
 }
