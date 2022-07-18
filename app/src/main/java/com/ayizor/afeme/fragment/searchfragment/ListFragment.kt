@@ -15,13 +15,15 @@ import com.ayizor.afeme.databinding.FragmentListBinding
 import com.ayizor.afeme.databinding.ItemMainPostMoreBinding
 import com.ayizor.afeme.model.post.GetPost
 import com.ayizor.afeme.model.response.GetPostResponse
+import com.ayizor.afeme.model.response.MainResponse
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ListFragment : Fragment(), ItemMainPostsAdapter.OnPostItemClickListener,
-    ItemMainPostsAdapter.OnActionsButtonClickListener {
+    ItemMainPostsAdapter.OnActionsButtonClickListener,
+    ItemMainPostsAdapter.OnLikeButtonClickListener {
 
     lateinit var binding: FragmentListBinding
     val TAG: String = ListFragment::class.java.simpleName
@@ -49,7 +51,7 @@ class ListFragment : Fragment(), ItemMainPostsAdapter.OnPostItemClickListener,
 
     private fun refreshPostsAdapter(filters: ArrayList<GetPost>) {
         val adapter =
-            activity?.let { ItemMainPostsAdapter(it.applicationContext, filters, this, this) }
+            activity?.let { ItemMainPostsAdapter(it.applicationContext, filters, this, this, this) }
         binding.rvPosts.adapter = adapter
 
     }
@@ -60,6 +62,23 @@ class ListFragment : Fragment(), ItemMainPostsAdapter.OnPostItemClickListener,
 
     override fun onActionsButtonClickListener(id: Int) {
         showSettingsBottomsheet(id)
+    }
+
+    override fun onLikeButtonClickListener(id: Int, likeStatus: Boolean) {
+        dataService?.likePost(id)?.enqueue(object : Callback<MainResponse> {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onResponse(
+                call: Call<MainResponse>,
+                response: Response<MainResponse>
+            ) {
+
+
+            }
+
+            override fun onFailure(call: Call<MainResponse>, t: Throwable) {
+            }
+
+        })
     }
 
     private fun getPosts() {
@@ -110,4 +129,6 @@ class ListFragment : Fragment(), ItemMainPostsAdapter.OnPostItemClickListener,
         sheetDialog.show();
         sheetDialog.window?.attributes?.windowAnimations = R.style.DialogAnimaton;
     }
+
+
 }

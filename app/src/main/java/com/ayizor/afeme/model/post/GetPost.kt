@@ -53,7 +53,7 @@ data class GetPost(
     @SerializedName("flat")
     val post_flat: String? = "",
     @SerializedName("like")
-    val post_isLiked: Boolean? = null,
+    var post_isLiked: Boolean? = null,
     @SerializedName("reting")
     val post_rating: String? = null,
     @SerializedName("fullreyting")

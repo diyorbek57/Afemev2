@@ -1,26 +1,34 @@
 package com.ayizor.afeme.adapter
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.ayizor.afeme.R
 import com.ayizor.afeme.databinding.ItemMainPostBinding
 import com.ayizor.afeme.model.inmodels.Image
 import com.ayizor.afeme.model.post.GetPost
 
 
 class ItemMainPostsAdapter(
-    var context: Context,
+    val context: Context,
     var postsList: ArrayList<GetPost>,
     private val onPostItemClickListener: OnPostItemClickListener,
-    private val onActionsButtonClickListener: OnActionsButtonClickListener
-) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private val onActionsButtonClickListener: OnActionsButtonClickListener,
+    private val onLikeButtonClickListener: OnLikeButtonClickListener
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
 
     val TAG: String = ItemMainPostsAdapter::class.java.simpleName
     private lateinit var binding: ItemMainPostBinding
@@ -45,9 +53,32 @@ class ItemMainPostsAdapter(
                 if (post_images != null) {
                     setupViewPager(post_images)
                 }
+                if (post_isLiked == true) {
+                    binding.ivLike.setImageResource(R.drawable.ic_heart_full)
+                } else {
+                    binding.ivLike.setImageResource(R.drawable.ic_heart_outline)
+                }
+
+//post like click listener
+                binding.btnCall.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_CALL)
+
+                    intent.data = Uri.parse("tel:" + user?.user_phone_number)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent)
 
 
-
+                }
+                binding.ivLike.setOnClickListener {
+                    if (post_isLiked == true) {
+                        binding.ivLike.setImageResource(R.drawable.ic_heart_outline)
+                        onLikeButtonClickListener.onLikeButtonClickListener(post_id!!, false)
+                    } else {
+                        binding.ivLike.setImageResource(R.drawable.ic_heart_full)
+                        onLikeButtonClickListener.onLikeButtonClickListener(post_id!!, true)
+                    }
+                    post_isLiked = !post_isLiked!!
+                }
 
                 //post click listener
                 binding.llMain.setOnClickListener {
@@ -99,7 +130,7 @@ class ItemMainPostsAdapter(
 
 
     override fun getItemCount(): Int {
-        return postsList.size
+        return postsList.size - 1
     }
 
 
@@ -112,6 +143,10 @@ class ItemMainPostsAdapter(
 
     interface OnActionsButtonClickListener {
         fun onActionsButtonClickListener(id: Int)
+    }
+
+    interface OnLikeButtonClickListener {
+        fun onLikeButtonClickListener(id: Int, likeStatus: Boolean)
     }
 }
 

@@ -1,11 +1,9 @@
 package com.ayizor.afeme.api.main
 
 
-
-
 import com.ayizor.afeme.model.User
-import com.ayizor.afeme.model.response.*
 import com.ayizor.afeme.model.post.Post
+import com.ayizor.afeme.model.response.*
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -58,6 +56,9 @@ interface ApiInterface {
 
     @DELETE("post/{id}")
     fun deletePost(@Path("id") id: String): Call<List<Post>>
+
+    @GET("save/{id}")
+    fun likePost(@Path("id") post_id: Int): Call<MainResponse>
 
     //
     //auth

@@ -1,12 +1,21 @@
 package com.ayizor.afeme.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.ayizor.afeme.R
+import com.ayizor.afeme.databinding.ActivityDetailsBinding
 
-class DetailsActivity : AppCompatActivity() {
+class DetailsActivity : BaseActivity() {
+
+
+    lateinit var binding: ActivityDetailsBinding
+    val TAG: String = DetailsActivity::class.java.simpleName
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)
+        binding = ActivityDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        inits()
+    }
+
+    private fun inits() {
+
     }
 }
