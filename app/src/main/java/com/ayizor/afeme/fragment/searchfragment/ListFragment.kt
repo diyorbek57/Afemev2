@@ -1,6 +1,7 @@
 package com.ayizor.afeme.fragment.searchfragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ayizor.afeme.R
+import com.ayizor.afeme.activity.DetailsActivity
 import com.ayizor.afeme.adapter.ItemMainPostsAdapter
 import com.ayizor.afeme.api.main.ApiInterface
 import com.ayizor.afeme.api.main.Client
@@ -57,7 +59,11 @@ class ListFragment : Fragment(), ItemMainPostsAdapter.OnPostItemClickListener,
     }
 
     override fun onPostItemClickListener(id: Int, latitude: String, longitude: String) {
-
+        val intent = Intent(requireContext(), DetailsActivity::class.java)
+        intent.putExtra("POST_ID", id)
+        intent.putExtra("POST_LATITUDE", latitude)
+        intent.putExtra("POST_LONGITUDE", longitude)
+        startActivity(intent)
     }
 
     override fun onActionsButtonClickListener(id: Int) {

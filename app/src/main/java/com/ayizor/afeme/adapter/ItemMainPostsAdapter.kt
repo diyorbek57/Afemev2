@@ -109,6 +109,7 @@ class ItemMainPostsAdapter(
 
     private fun setupViewPager(postsList: ArrayList<Image>) {
         adapter = ItemPostViewPagerAdapter(postsList, context)
+        viewPager?.currentItem = 1;
         viewPager = binding.viewpager
         viewPager?.offscreenPageLimit = 3
         viewPager!!.adapter = adapter

@@ -37,4 +37,11 @@
     <string name="complain_about_the_ad">Complain about the ad</string>
     <string name="hide_ad">Hide ad</string>
     <string name="actions">Actions</string>
+    <string name="layout">Layout</string>
+    <string name="watching_the_price">Watching the price</string>
+    <string name="appointment">Appointment</string>
+    <string name="location">Location</string>
+    <string name="deal_terms">Deal terms</string>
+    <string name="about_the_object">About the object</string>
+    <string name="equipment">Equipment</string>
 </resources>
