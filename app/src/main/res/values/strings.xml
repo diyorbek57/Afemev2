@@ -44,4 +44,35 @@
     <string name="deal_terms">Deal terms</string>
     <string name="about_the_object">About the object</string>
     <string name="equipment">Equipment</string>
+    <string name="place_an_ad">Place an ad</string>
+    <string name="on_afeme">on Afeme</string>
+    <string name="apartment_floor">Apartment floor</string>
+    <string name="floors_in_the_house">Floors in the house</string>
+    <string name="price_and_terms_of_the_deal">Price and terms of the deal</string>
+    <string name="description">Description</string>
+    <string name="choose_photo">Choose photo</string>
+    <string name="preview">Preview</string>
+    <string name="about_the_apartment">About the apartment</string>
+    <string name="about_the_house">About the house</string>
+    <string name="built_year">Built year</string>
+    <string name="building_material">Building material</string>
+    <string name="living_space">Living space</string>
+    <string name="kitchen_area">Kitchen area</string>
+    <string name="total_area">Total area</string>
+    <string name="select_property_type">Select property type</string>
+    <string name="floor">Floor</string>
+    <string name="photos">Photos</string>
+    <string name="maximum_15_photos">Maximum 15 photos</string>
+    <string name="take_a_picture_of_all_the_rooms_the_kitchen_the_bathroom_the_corridor_the_balcony_the_view_from_the_window_the_facade_of_the_building_the_entrance_don_t_use_screenshots">Take a picture of all the rooms, kitchen, bathroom, corridor, balcony, view from the window, facade of the building, entrance. Don\'t use screenshots.</string>
+    <string name="create_post">Create post</string>
+    <string name="price">Price</string>
+    <string name="how_many_rooms_in_the_properity">How many rooms in the properity?</string>
+    <string name="rooms">Rooms</string>
+    <string name="publish">Publish</string>
+    <string name="publish_later">Publish later</string>
+    <string name="room">Room</string>
+    <string name="amenities_and_details">Amenities and Details</string>
+    <string name="communication_method">Communication method</string>
+    <string name="area">Area</string>
+
 </resources>

@@ -2,9 +2,11 @@ package com.ayizor.afeme.adapter
 
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ayizor.afeme.R
 import com.ayizor.afeme.databinding.ItemMainPostViewPagerBinding
 import com.ayizor.afeme.model.inmodels.Image
 import com.ayizor.afeme.model.post.GetPost
@@ -29,8 +31,10 @@ class ItemPostViewPagerAdapter(
         with(holder) {
             with(postsList[position]) {
                     Glide.with(context)
-                        .load(image_url)
+                        .load(image_url).error(ColorDrawable(R.color.very_dark_gray))
                         .into(binding.ivViewpager)
+
+
             }
         }
 

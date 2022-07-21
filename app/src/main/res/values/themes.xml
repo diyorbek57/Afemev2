@@ -81,4 +81,9 @@
     </style>
     <style name="Theme.AfemeV2.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.AfemeV2.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    //chipStyle
+    <style name="CustomChipGroupStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/item_chip_selector</item>
+    </style>
 </resources>

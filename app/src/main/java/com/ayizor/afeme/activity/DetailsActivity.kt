@@ -1,5 +1,6 @@
 package com.ayizor.afeme.activity
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -13,16 +14,16 @@ import android.view.ViewTreeObserver
 import android.widget.TextView
 import android.widget.TextView.BufferType
 import androidx.core.content.ContextCompat
-import androidx.viewpager2.widget.CompositePageTransformer
-import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.ayizor.afeme.R
 import com.ayizor.afeme.adapter.ItemPostViewPagerAdapter
 import com.ayizor.afeme.api.main.ApiInterface
+import com.ayizor.afeme.api.main.Client
 import com.ayizor.afeme.databinding.ActivityDetailsBinding
 import com.ayizor.afeme.helper.CustomSpannable
 import com.ayizor.afeme.model.inmodels.Image
 import com.ayizor.afeme.model.post.GetPost
+import com.ayizor.afeme.model.response.PostResponse
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -31,6 +32,9 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DetailsActivity : BaseActivity(), OnMapReadyCallback {
 
@@ -50,10 +54,40 @@ class DetailsActivity : BaseActivity(), OnMapReadyCallback {
     }
 
     private fun inits() {
+        dataService = Client.getClient(this)?.create(ApiInterface::class.java)
+        val extras = intent.extras
+        if (extras != null) {
+            val id = extras.getInt("POST_ID")
+            getPost(id)
+        }
+    }
+
+    private fun getPost(id: Int) {
+        dataService!!.getSinglePost(id)
+            .enqueue(object : Callback<PostResponse> {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onResponse(
+                    call: Call<PostResponse>,
+                    response: Response<PostResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.data?.let { displayPostDatas(it) }
+                        phoneNumber = response.body()?.data?.user?.user_phone_number.toString()
+//                binding.rvSellType.visibility = View.VISIBLE
+//                binding.progressBar.visibility = View.GONE
+                    }
+                }
+
+                override fun onFailure(call: Call<PostResponse>, t: Throwable) {
+
+                }
+            })
 
     }
 
     private fun displayPostDatas(post: GetPost) {
+
+        post.post_images?.let { setupViewPager(it) }
         //  post.user?.let { displayUserDatas(it) }
 //        setupViewPager(post)
 //        val locationName = post.post_latitude?.let {
@@ -94,18 +128,10 @@ class DetailsActivity : BaseActivity(), OnMapReadyCallback {
         viewPager!!.clipToPadding = false
         viewPager!!.clipChildren = false
         viewPager!!.getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
-        val transformer = CompositePageTransformer()
 
-        transformer.addTransformer(MarginPageTransformer(30))
-
-        transformer.addTransformer { page, position ->
-            //val v = 1 - abs(position)
-
-
-        }
-        viewPager!!.setPageTransformer(transformer)
 
     }
+
 
     private fun makeTextViewResizable(
         tv: TextView,
@@ -147,6 +173,7 @@ class DetailsActivity : BaseActivity(), OnMapReadyCallback {
         })
     }
 
+
     private fun addClickablePartTextViewResizable(
         strSpanned: Spanned,
         tv: TextView,
@@ -175,8 +202,8 @@ class DetailsActivity : BaseActivity(), OnMapReadyCallback {
         return ssb
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
 
+    override fun onMapReady(googleMap: GoogleMap) {
         val extras = intent.extras
         if (extras != null) {
             val latitude = extras.getString("POST_LATITUDE", "").toDouble()
