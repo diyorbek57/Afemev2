@@ -78,7 +78,7 @@
 
 
         <androidx.viewpager.widget.ViewPager
-            android:id="@+id/vp_vaforites"
+            android:id="@+id/vp_favorites"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/tl_favorites" />

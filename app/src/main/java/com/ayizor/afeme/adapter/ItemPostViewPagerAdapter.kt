@@ -31,7 +31,7 @@ class ItemPostViewPagerAdapter(
         with(holder) {
             with(postsList[position]) {
                     Glide.with(context)
-                        .load(image_url).error(ColorDrawable(R.color.very_dark_gray))
+                        .load(image_url).error(R.drawable.default_profile_image)
                         .into(binding.ivViewpager)
 
 

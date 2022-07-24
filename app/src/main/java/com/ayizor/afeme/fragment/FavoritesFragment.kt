@@ -1,13 +1,11 @@
 package com.ayizor.afeme.fragment
 
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
 import com.ayizor.afeme.R
 import com.ayizor.afeme.adapter.ItemFavoritesViewPagerAdapter
 import com.ayizor.afeme.databinding.FragmentFavoritesBinding
@@ -21,7 +19,6 @@ class FavoritesFragment : Fragment() {
     lateinit var binding: FragmentFavoritesBinding
     val TAG: String = FavoritesFragment::class.java.simpleName
     lateinit var adapter: ItemFavoritesViewPagerAdapter
-
 
 
     override fun onCreateView(
@@ -42,8 +39,8 @@ class FavoritesFragment : Fragment() {
         adapter = ItemFavoritesViewPagerAdapter(childFragmentManager)
         adapter.addFragment(OffersFragment(), getString(R.string.offers))
         adapter.addFragment(SubscriptionsFragment(), getString(R.string.subscriptions))
-        binding.vpVaforites.adapter = adapter
-        binding.tlFavorites.setupWithViewPager(binding.vpVaforites)
+        binding.vpFavorites.adapter = adapter
+        binding.tlFavorites.setupWithViewPager(binding.vpFavorites)
 
         binding.tlFavorites.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {

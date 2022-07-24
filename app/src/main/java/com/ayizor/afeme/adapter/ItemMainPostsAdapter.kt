@@ -94,6 +94,19 @@ class ItemMainPostsAdapter(
                         }
                     }
                 }
+                binding.viewpager.setOnClickListener {
+                    if (post_id != null) {
+                        if (post_latitude != null) {
+                            if (post_longitude != null) {
+                                onPostItemClickListener.onPostItemClickListener(
+                                    post_id,
+                                    post_latitude,
+                                    post_longitude
+                                )
+                            }
+                        }
+                    }
+                }
                 //actions bottomsheet click listener
                 binding.btnMore.setOnClickListener {
                     if (post_id != null) {

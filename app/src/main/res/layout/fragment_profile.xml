@@ -1,11 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:orientation="vertical"
     tools:context=".fragment.ProfileFragment">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="@null"
+            app:contentInsetStart="0dp"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:titleTextColor="@color/white">
 
 
-</FrameLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="15dp"
+                    android:fontFamily="@font/generalsans_medium"
+                    android:text="@string/profile"
+                    android:textColor="@color/very_dark_gray_mostly_black"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        android:background="@color/very_dark_gray" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_users_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/default_profile_image"
+            app:shapeAppearanceOverlay="@style/circler_imageView" />
+
+        <TextView
+            android:id="@+id/tv_fullname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"
+            android:layout_toEndOf="@id/iv_users_image"
+            android:fontFamily="@font/generalsans_medium"
+            android:text="@string/favorites"
+            android:textColor="@color/very_dark_gray_mostly_black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="15dp"
+            android:fontFamily="@font/generalsans_regular"
+            android:text="@string/logout"
+            android:textColor="@color/bright_blue"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        android:background="@color/very_dark_gray" />
+
+    <LinearLayout
+        android:id="@+id/ll_chat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_message_three_dots" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/generalsans_medium"
+            android:text="@string/write_a_note"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_setting" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/generalsans_medium"
+            android:text="@string/settings"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+</LinearLayout>

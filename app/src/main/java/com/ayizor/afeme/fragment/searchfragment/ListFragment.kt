@@ -14,7 +14,7 @@ import com.ayizor.afeme.adapter.ItemMainPostsAdapter
 import com.ayizor.afeme.api.main.ApiInterface
 import com.ayizor.afeme.api.main.Client
 import com.ayizor.afeme.databinding.FragmentListBinding
-import com.ayizor.afeme.databinding.ItemMainPostMoreBinding
+import com.ayizor.afeme.databinding.ItemBottomSheetMoreBinding
 import com.ayizor.afeme.model.post.GetPost
 import com.ayizor.afeme.model.response.GetPostResponse
 import com.ayizor.afeme.model.response.MainResponse
@@ -112,8 +112,8 @@ class ListFragment : Fragment(), ItemMainPostsAdapter.OnPostItemClickListener,
 
     fun showSettingsBottomsheet(post_id: Int) {
         val sheetDialog = BottomSheetDialog(requireContext(), R.style.AppBottomSheetDialogTheme)
-        val bottomSheetBinding: ItemMainPostMoreBinding =
-            ItemMainPostMoreBinding.inflate(layoutInflater)
+        val bottomSheetBinding: ItemBottomSheetMoreBinding =
+            ItemBottomSheetMoreBinding.inflate(layoutInflater)
         sheetDialog.setContentView(bottomSheetBinding.root)
 
 

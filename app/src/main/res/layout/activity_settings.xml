@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.SettingsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="@null"
+            app:contentInsetStart="0dp"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:titleTextColor="@color/white">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_back" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:fontFamily="@font/generalsans_medium"
+                    android:text="@string/settings"
+                    android:textColor="@color/very_dark_gray_mostly_black"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:fontFamily="@font/generalsans_semibold"
+            android:text="@string/notifications"
+            android:textColor="@color/very_dark_gray_mostly_black"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/generalsans_medium"
+                android:text="@string/new_listings_on_subscriptions"
+                android:textColor="@color/very_dark_gray_mostly_black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="10dp"
+            android:background="@color/very_dark_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/generalsans_medium"
+                android:text="@string/related_searches"
+                android:textColor="@color/very_dark_gray_mostly_black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="10dp"
+            android:background="@color/very_dark_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:fontFamily="@font/generalsans_semibold"
+            android:text="@string/display"
+            android:textColor="@color/very_dark_gray_mostly_black"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/generalsans_medium"
+                android:text="@string/application_theme"
+                android:textColor="@color/very_dark_gray_mostly_black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_current_theme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/generalsans_regular"
+                android:textColor="@color/vivid_blue"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="10dp"
+            android:background="@color/very_dark_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:fontFamily="@font/generalsans_semibold"
+            android:text="@string/map_style"
+            android:textColor="@color/very_dark_gray_mostly_black"
+            android:textSize="20sp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="0dp">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tl_map_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:tabIndicator="@color/bright_blue"
+                app:tabIndicatorAnimationMode="fade"
+                app:tabIndicatorColor="@null"
+                app:tabIndicatorGravity="stretch"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/white"
+                app:tabTextColor="@color/very_dark_gray_mostly_black" />
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="10dp"
+            android:background="@color/very_dark_gray" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:fontFamily="@font/generalsans_semibold"
+            android:text="@string/additionally"
+            android:textColor="@color/very_dark_gray_mostly_black"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:id="@+id/rl_clear_cache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/generalsans_medium"
+                android:text="@string/clear_cache"
+                android:textColor="@color/very_dark_gray_mostly_black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_cache"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/generalsans_medium"
+                android:textColor="@color/very_dark_gray"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="10dp"
+            android:background="@color/very_dark_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/generalsans_medium"
+                android:text="@string/related_searches"
+                android:textColor="@color/very_dark_gray_mostly_black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="10dp"
+            android:background="@color/very_dark_gray" />
+    </LinearLayout>
+</LinearLayout>

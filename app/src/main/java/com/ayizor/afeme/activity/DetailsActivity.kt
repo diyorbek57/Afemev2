@@ -9,6 +9,7 @@ import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
+import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.TextView
@@ -20,10 +21,12 @@ import com.ayizor.afeme.adapter.ItemPostViewPagerAdapter
 import com.ayizor.afeme.api.main.ApiInterface
 import com.ayizor.afeme.api.main.Client
 import com.ayizor.afeme.databinding.ActivityDetailsBinding
+import com.ayizor.afeme.databinding.ItemBottomSheetMoreBinding
 import com.ayizor.afeme.helper.CustomSpannable
 import com.ayizor.afeme.model.inmodels.Image
 import com.ayizor.afeme.model.post.GetPost
 import com.ayizor.afeme.model.response.PostResponse
+import com.ayizor.afeme.utils.Utils
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -32,9 +35,11 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.properties.Delegates
 
 class DetailsActivity : BaseActivity(), OnMapReadyCallback {
 
@@ -45,6 +50,7 @@ class DetailsActivity : BaseActivity(), OnMapReadyCallback {
     lateinit var viewPagerAdapter: ItemPostViewPagerAdapter
     lateinit var phoneNumber: String
     private var viewPager: ViewPager2? = null
+    var id by Delegates.notNull<Int>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsBinding.inflate(layoutInflater)
@@ -55,10 +61,20 @@ class DetailsActivity : BaseActivity(), OnMapReadyCallback {
 
     private fun inits() {
         dataService = Client.getClient(this)?.create(ApiInterface::class.java)
+        supportMapFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_map_details) as SupportMapFragment
+        supportMapFragment.getMapAsync(this)
         val extras = intent.extras
         if (extras != null) {
-            val id = extras.getInt("POST_ID")
+            id = extras.getInt("POST_ID")
             getPost(id)
+        }
+
+        binding.llPlan.setOnClickListener {
+            viewPager?.currentItem = viewPagerAdapter.itemCount - 1
+        }
+        binding.btnMore.setOnClickListener {
+            showSettingsBottomsheet(id)
         }
     }
 
@@ -89,39 +105,46 @@ class DetailsActivity : BaseActivity(), OnMapReadyCallback {
 
         post.post_images?.let { setupViewPager(it) }
         //  post.user?.let { displayUserDatas(it) }
-//        setupViewPager(post)
-//        val locationName = post.post_latitude?.let {
-//            post.post_longitude?.let { it1 ->
-//                Utils.getCoordinateName(
-//                    this,
-//                    it.toDouble(),
-//                    it1.toDouble()
-//                )
-//            }
-//        }
-//        if (locationName != null) {
-//            val state = locationName.state
-//            val city = locationName.city
-//            if (!city.isNullOrEmpty()) {
-//                binding.tvLocationDetails.text = state +", "+ city
-//            } else {
-//                binding.tvLocationDetails.text = state
-//            }
-//            binding.tvNamePostDetails.text = state+", "+ post.post_rooms+" rooms"
+        val locationName = post.post_latitude?.let {
+            post.post_longitude?.let { it1 ->
+                Utils.getCoordinateName(
+                    this,
+                    it.toDouble(),
+                    it1.toDouble()
+                )
+            }
+        }
+        if (locationName != null) {
+            val state = locationName.state
+            val city = locationName.city
+            if (!city.isNullOrEmpty()) {
+                binding.tvFullLocation.text = state + ", " + city
+            } else {
+                binding.tvFullLocation.text = state
+            }
 
-        // makeTextViewResizable(, 3, "View More", true)
-        binding.tvPriceMain.text = post.post_price_usd
-        //binding.tvDescriptionDetails.text = post.post_description.toString()
-        // binding.tvTypeDetails.text = post.post_building_type?.category_name_en.toString()
 
-        //binding.tvDescriptionDetails.text = post.post_description
+            binding.tvDescription.text = post.post_description.toString()
+            makeTextViewResizable(binding.tvDescription, 3, getString(R.string.view_more), true)
+            binding.tvPriceMain.text = post.post_price_usd
+            binding.tvBuindingArea.text = post.post_area?.total_area
+            //set -> if language changed
+            binding.tvBuindingAppointment.text = post.post_building_type?.category_name_en
+            if (!post.post_flat.isNullOrEmpty()) {
+                binding.tvBuildingFloor.text = post.post_floor + " of " + post.post_flat
+            } else {
+                binding.tvBuildingFloor.text = post.post_floor
+            }
 
+
+
+        }
     }
 
 
-    private fun setupViewPager(postsList: ArrayList<Image>) {
+    fun setupViewPager(postsList: ArrayList<Image>) {
         viewPagerAdapter = ItemPostViewPagerAdapter(postsList, context)
-        viewPager?.currentItem = 1;
+        viewPager?.currentItem = 1
         viewPager = binding.viewpager
         viewPager?.offscreenPageLimit = 3
         viewPager!!.adapter = viewPagerAdapter
@@ -132,6 +155,31 @@ class DetailsActivity : BaseActivity(), OnMapReadyCallback {
 
     }
 
+    fun showSettingsBottomsheet(post_id: Int) {
+        val sheetDialog = BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme)
+        val bottomSheetBinding: ItemBottomSheetMoreBinding =
+            ItemBottomSheetMoreBinding.inflate(layoutInflater)
+        sheetDialog.setContentView(bottomSheetBinding.root)
+
+
+        bottomSheetBinding.llBsNote.setOnClickListener {
+
+        }
+        bottomSheetBinding.llBsShare.setOnClickListener {
+
+        }
+        bottomSheetBinding.llBsReport.setOnClickListener {
+
+        }
+        bottomSheetBinding.llBsHidePost.setOnClickListener {
+
+        }
+        bottomSheetBinding.ivBsClose.setOnClickListener {
+            sheetDialog.dismiss()
+        }
+        sheetDialog.show();
+        sheetDialog.window?.attributes?.windowAnimations = R.style.DialogAnimaton;
+    }
 
     private fun makeTextViewResizable(
         tv: TextView,
@@ -208,7 +256,7 @@ class DetailsActivity : BaseActivity(), OnMapReadyCallback {
         if (extras != null) {
             val latitude = extras.getString("POST_LATITUDE", "").toDouble()
             val longitude = extras.getString("POST_LONGITUDE", "").toDouble()
-
+            Log.e(TAG, latitude.toString() + "" + longitude.toString())
             val postLocation = LatLng(latitude, longitude)
             googleMap.uiSettings.isZoomGesturesEnabled = false;
             googleMap.uiSettings.isScrollGesturesEnabled = false
@@ -218,7 +266,7 @@ class DetailsActivity : BaseActivity(), OnMapReadyCallback {
             val marker: MarkerOptions =
                 MarkerOptions().position(postLocation)
             // Changing marker icon
-            marker.icon(bitmapDescriptorFromVector(this, R.drawable.ic_heart_full))
+            marker.icon(bitmapDescriptorFromVector(this, R.drawable.ic_home_marker))
             // adding marker
             googleMap.addMarker(marker)
 

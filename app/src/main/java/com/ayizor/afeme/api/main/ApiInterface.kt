@@ -111,6 +111,6 @@ interface ApiInterface {
     fun getRegions(): Call<RegionsResponse>
 
 
-//filter
+//chat
 
 }

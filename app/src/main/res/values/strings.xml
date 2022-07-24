@@ -74,5 +74,23 @@
     <string name="amenities_and_details">Amenities and Details</string>
     <string name="communication_method">Communication method</string>
     <string name="area">Area</string>
+    <string name="logout">Logout</string>
+    <string name="settings">Settings</string>
+    <string name="messages">Messages</string>
+    <string name="call_history">Call History</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancle">Cancle</string>
+    <string name="view_more">View More</string>
+    <string name="notifications">Notifications</string>
+    <string name="new_listings_on_subscriptions">New listings on subscriptions</string>
+    <string name="related_searches">Related searches</string>
+    <string name="display">Display</string>
+    <string name="application_theme">Application theme</string>
+    <string name="terrain">Terrain</string>
+    <string name="hybrid">Hybrid</string>
+    <string name="normal">Normal</string>
+    <string name="map_style">Map style</string>
+    <string name="additionally">Additionally</string>
+    <string name="clear_cache">Clear cache</string>
 
 </resources>

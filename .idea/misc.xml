@@ -10,6 +10,7 @@
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/drawable/ic_clock.xml" value="0.1" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/drawable/ic_heart_full.xml" value="0.22" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/drawable/ic_heart_outline.xml" value="0.168" />
+        <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/drawable/ic_home_marker.xml" value="0.195" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/drawable/ic_key.xml" value="0.1" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/drawable/ic_map_outline.xml" value="0.168" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/drawable/ic_more_horizontal.xml" value="0.168" />
@@ -26,12 +27,14 @@
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/drawable/nav_ic_search_default.xml" value="0.22" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/drawable/nav_profile_selector.xml" value="0.22" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/activity_create_post.xml" value="0.1" />
-        <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/activity_details.xml" value="0.3625" />
+        <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/activity_details.xml" value="0.22" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/activity_intro.xml" value="0.262037037037037" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/activity_main.xml" value="0.13215859030837004" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/activity_preview_created_post.xml" value="0.1" />
+        <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/activity_settings.xml" value="0.31851851851851853" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/fragment_area.xml" value="0.33" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/fragment_buildning_type.xml" value="0.1" />
+        <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/fragment_call_history.xml" value="0.31851851851851853" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/fragment_chat.xml" value="0.2861111111111111" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/fragment_description.xml" value="0.1" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/fragment_favorites.xml" value="0.2524271844660194" />
@@ -39,6 +42,7 @@
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/fragment_home.xml" value="0.32314814814814813" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/fragment_list.xml" value="0.26851851851851855" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/fragment_map.xml" value="0.29259259259259257" />
+        <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/fragment_messages.xml" value="0.31851851851851853" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/fragment_offers.xml" value="0.262037037037037" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/fragment_photos.xml" value="0.22" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/fragment_post_type.xml" value="0.1" />
@@ -47,13 +51,18 @@
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/fragment_rooms.xml" value="0.1" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/fragment_search.xml" value="0.26851851851851855" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/fragment_services.xml" value="0.2861111111111111" />
+        <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/fragment_subscriptions.xml" value="0.31851851851851853" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/item_add_photo.xml" value="0.1" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/item_added_photo.xml" value="0.1" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/item_create_post_building_type.xml" value="0.1" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/item_create_post_sell_type.xml" value="0.1" />
+        <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/item_image_and_info_textview.xml" value="0.31851851851851853" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/item_main_post.xml" value="0.2833333333333333" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/item_main_post_more.xml" value="0.2361111111111111" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/item_main_post_view_pager.xml" value="0.29259259259259257" />
+        <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/item_title_and_info_textview.xml" value="0.33" />
+        <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/view_dialog_double.xml" value="0.31851851851851853" />
+        <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/layout/view_dialog_single.xml" value="0.31851851851851853" />
         <entry key="..\:/Programming/AndroidProjects/Afemev2/app/src/main/res/menu/main_bottom_navigation.xml" value="0.1" />
       </map>
     </option>
