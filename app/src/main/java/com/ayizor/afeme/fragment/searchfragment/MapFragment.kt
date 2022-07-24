@@ -1,29 +1,42 @@
 package com.ayizor.afeme.fragment.searchfragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.ayizor.afeme.R
+import com.ayizor.afeme.activity.DetailsActivity
+import com.ayizor.afeme.adapter.ItemMainMapPostsAdapter
+import com.ayizor.afeme.adapter.ItemMainPostsAdapter
 import com.ayizor.afeme.api.main.ApiInterface
 import com.ayizor.afeme.api.main.Client
+import com.ayizor.afeme.databinding.FragmentMapBinding
+import com.ayizor.afeme.databinding.ItemBottomSheetMoreBinding
 import com.ayizor.afeme.model.CustomClusterItem
 import com.ayizor.afeme.model.post.GetPost
 import com.ayizor.afeme.model.response.GetPostResponse
-import com.ayizor.afeme.databinding.FragmentMapBinding
+import com.ayizor.afeme.utils.Logger
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.maps.android.clustering.ClusterManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class MapFragment : Fragment(), OnMapReadyCallback {
+class MapFragment : Fragment(), ItemMainMapPostsAdapter.OnPostItemClickListener,
+    ItemMainMapPostsAdapter.OnActionsButtonClickListener,
+    ItemMainMapPostsAdapter.OnLikeButtonClickListener, OnMapReadyCallback {
     //binding
     lateinit var binding: FragmentMapBinding
 
@@ -35,6 +48,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     //arraylist for posts
     var postsList: ArrayList<GetPost> = ArrayList()
+    lateinit var bottomSheetBehavior: BottomSheetBehavior<RelativeLayout>
 
     //
     private lateinit var clusterManager: ClusterManager<CustomClusterItem>
@@ -44,6 +58,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     ): View? {
 
         binding = FragmentMapBinding.inflate(inflater, container, false)
+
         inits(savedInstanceState)
         return binding.root
     }
@@ -52,8 +67,11 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         dataService = Client.getClient(requireContext())?.create(ApiInterface::class.java)
         //setup map settings
+
         binding.mapViewSearch.onCreate(savedInstanceState)
         binding.mapViewSearch.getMapAsync(this)
+
+
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -75,6 +93,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         googleMap: GoogleMap,
         clusterManager: ClusterManager<CustomClusterItem>
     ) {
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetSearch)
+        binding.rvPost.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         dataService?.getAllPosts()?.enqueue(object : Callback<GetPostResponse> {
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
@@ -109,6 +130,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 }
 
             }
+
             override fun onFailure(call: Call<GetPostResponse>, t: Throwable) {
 
             }
@@ -118,19 +140,78 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     // cluster's marker click event
     var mClusterItemClickListener: ClusterManager.OnClusterItemClickListener<CustomClusterItem> =
         ClusterManager.OnClusterItemClickListener<CustomClusterItem> { item ->
-//        binding.bottomSheetSearch.visibility = View.VISIBLE
-//        if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED) {
-//            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-//        }
+            binding.bottomSheetSearch.visibility = View.VISIBLE
+            if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            }
 
-            showBottomSheet(item.getTag()!!)
+
+            val list: ArrayList<GetPost> = ArrayList()
+            list.add(item.getTag()!!)
+            refreshPostsAdapter(list)
             true
         }
 
-    fun showBottomSheet(post: GetPost) {
+
+    override fun onPostItemClickListener(id: Int, latitude: String, longitude: String) {
+        val intent = Intent(requireContext(), DetailsActivity::class.java)
+        intent.putExtra("POST_ID", id)
+        intent.putExtra("POST_LATITUDE", latitude)
+        intent.putExtra("POST_LONGITUDE", longitude)
+        startActivity(intent)
+    }
+
+    override fun onActionsButtonClickListener(id: Int) {
+        showSettingsBottomsheet(id)
+    }
+
+    private fun showBottomSheet(post: GetPost) {
+
+        Logger.e(TAG, "have post")
 
     }
 
+    private fun refreshPostsAdapter(filters: ArrayList<GetPost>) {
+        Logger.d(TAG, filters.toString())
+        val adapter =
+            activity?.applicationContext?.let {
+                ItemMainMapPostsAdapter(
+                    it,
+                    filters,
+                    this,
+                    this,
+                    this
+                )
+            }
+        binding.rvPost.adapter = adapter
+
+    }
+
+    fun showSettingsBottomsheet(post_id: Int) {
+        val sheetDialog = BottomSheetDialog(requireContext(), R.style.AppBottomSheetDialogTheme)
+        val bottomSheetBinding: ItemBottomSheetMoreBinding =
+            ItemBottomSheetMoreBinding.inflate(layoutInflater)
+        sheetDialog.setContentView(bottomSheetBinding.root)
+
+
+        bottomSheetBinding.llBsNote.setOnClickListener {
+
+        }
+        bottomSheetBinding.llBsShare.setOnClickListener {
+
+        }
+        bottomSheetBinding.llBsReport.setOnClickListener {
+
+        }
+        bottomSheetBinding.llBsHidePost.setOnClickListener {
+
+        }
+        bottomSheetBinding.ivBsClose.setOnClickListener {
+            sheetDialog.dismiss()
+        }
+        sheetDialog.show();
+        sheetDialog.window?.attributes?.windowAnimations = R.style.DialogAnimaton;
+    }
 
     override fun onResume() {
         binding.mapViewSearch.onResume()
@@ -150,6 +231,10 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     override fun onLowMemory() {
         super.onLowMemory()
         binding.mapViewSearch.onLowMemory()
+    }
+
+    override fun onLikeButtonClickListener(id: Int, likeStatus: Boolean) {
+
     }
 
 }

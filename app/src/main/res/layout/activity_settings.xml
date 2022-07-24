@@ -86,9 +86,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:layout_marginVertical="10dp"
-            android:background="@color/very_dark_gray" />
+            android:background="@color/very_light_gray_mostly_white" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -107,9 +107,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:layout_marginVertical="10dp"
-            android:background="@color/very_dark_gray" />
+            android:background="@color/very_light_gray_mostly_white" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -146,9 +146,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:layout_marginVertical="10dp"
-            android:background="@color/very_dark_gray" />
+            android:background="@color/very_light_gray_mostly_white" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -181,9 +181,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:layout_marginVertical="10dp"
-            android:background="@color/very_dark_gray" />
+            android:background="@color/very_light_gray_mostly_white" />
 
 
         <TextView
@@ -222,9 +222,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:layout_marginVertical="10dp"
-            android:background="@color/very_dark_gray" />
+            android:background="@color/very_light_gray_mostly_white" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -236,15 +236,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/generalsans_medium"
-                android:text="@string/related_searches"
+                android:text="@string/about_the_application"
                 android:textColor="@color/very_dark_gray_mostly_black"
                 android:textSize="18sp" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:layout_marginVertical="10dp"
-            android:background="@color/very_dark_gray" />
+            android:background="@color/very_light_gray_mostly_white" />
     </LinearLayout>
 </LinearLayout>

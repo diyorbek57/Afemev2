@@ -92,5 +92,8 @@
     <string name="map_style">Map style</string>
     <string name="additionally">Additionally</string>
     <string name="clear_cache">Clear cache</string>
+    <string name="about_the_application">About the application</string>
+    <string name="add_listings_to_favorites">Add listings to favorites</string>
+    <string name="do_not_miss_price_changes_of_interesting_offers">Do not miss price changes of interesting offers</string>
 
 </resources>

@@ -18,7 +18,7 @@ import com.ayizor.afeme.model.post.GetPost
 import com.ayizor.afeme.utils.Logger
 
 
-class ItemMainPostsAdapter(
+class ItemMainMapPostsAdapter(
     val context: Context,
     var postsList: ArrayList<GetPost>,
     private val onPostItemClickListener: OnPostItemClickListener,
@@ -27,7 +27,7 @@ class ItemMainPostsAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
-    val TAG: String = ItemMainPostsAdapter::class.java.simpleName
+    val TAG: String = ItemMainMapPostsAdapter::class.java.simpleName
     private lateinit var binding: ItemMainPostBinding
     private var viewPager: ViewPager2? = null
     private var adapter: ItemPostViewPagerAdapter? = null

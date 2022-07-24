@@ -59,12 +59,7 @@ class PreviewCreatedPostActivity : BaseActivity() {
         displaySavedDatas()
         getAllBuildingMaterials()
         binding.chipGroupBuildingMaterials.setOnCheckedStateChangeListener { group, checkedIds ->
-            Toast.makeText(
-                this,
-                checkedIds.toString().replace("[", "").replace("]", ""),
-                Toast.LENGTH_SHORT
-            )
-                .show()
+            Toast.makeText(this, checkedIds.toString().replace("[", "").replace("]", ""), Toast.LENGTH_SHORT).show()
         }
         binding.btnPublish.setOnClickListener {
             imagesUrls.clear()
