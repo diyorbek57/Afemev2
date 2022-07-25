@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ayizor.afeme.R
 import com.ayizor.afeme.activity.DetailsActivity
 import com.ayizor.afeme.adapter.ItemMainMapPostsAdapter
-import com.ayizor.afeme.adapter.ItemMainPostsAdapter
 import com.ayizor.afeme.api.main.ApiInterface
 import com.ayizor.afeme.api.main.Client
 import com.ayizor.afeme.databinding.FragmentMapBinding
@@ -20,6 +19,7 @@ import com.ayizor.afeme.databinding.ItemBottomSheetMoreBinding
 import com.ayizor.afeme.model.CustomClusterItem
 import com.ayizor.afeme.model.post.GetPost
 import com.ayizor.afeme.model.response.GetPostResponse
+import com.ayizor.afeme.model.response.PostResponse
 import com.ayizor.afeme.utils.Logger
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -146,9 +146,10 @@ class MapFragment : Fragment(), ItemMainMapPostsAdapter.OnPostItemClickListener,
             }
 
 
-            val list: ArrayList<GetPost> = ArrayList()
-            list.add(item.getTag()!!)
-            refreshPostsAdapter(list)
+//            val list: ArrayList<GetPost> = ArrayList()
+//            list.add(item.getTag()!!)
+            item.getTag()?.post_id?.let { getPosts(it) }
+
             true
         }
 
@@ -167,12 +168,10 @@ class MapFragment : Fragment(), ItemMainMapPostsAdapter.OnPostItemClickListener,
 
     private fun showBottomSheet(post: GetPost) {
 
-        Logger.e(TAG, "have post")
 
     }
 
     private fun refreshPostsAdapter(filters: ArrayList<GetPost>) {
-        Logger.d(TAG, filters.toString())
         val adapter =
             activity?.applicationContext?.let {
                 ItemMainMapPostsAdapter(
@@ -184,6 +183,30 @@ class MapFragment : Fragment(), ItemMainMapPostsAdapter.OnPostItemClickListener,
                 )
             }
         binding.rvPost.adapter = adapter
+        adapter?.notifyDataSetChanged()
+    }
+
+    private fun getPosts(id: Int) {
+        val list: ArrayList<GetPost> = ArrayList()
+        dataService?.getSinglePost(id)?.enqueue(object : Callback<PostResponse> {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onResponse(
+                call: Call<PostResponse>,
+                response: Response<PostResponse>
+            ) {
+                if (response.isSuccessful && response.code() == 200) {
+
+                    response.body()?.data?.let { list.add(it) }
+                    refreshPostsAdapter(list)
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<PostResponse>, t: Throwable) {
+            }
+
+        })
 
     }
 
