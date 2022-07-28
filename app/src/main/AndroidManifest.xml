@@ -21,7 +21,7 @@
         android:protectionLevel="signature" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -32,10 +32,22 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".activity.SettingsActivity"
+            android:name=".activity.ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.IntroActivity"
+            android:name=".activity.SettingsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.authentication.CodeConfirmActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.authentication.SignInActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.authentication.SignUpActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.authentication.IntroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,8 +59,17 @@
             android:name=".activity.DetailsActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:name=".activity.CreatePostActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.PreviewCreatedPostActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.FilterActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

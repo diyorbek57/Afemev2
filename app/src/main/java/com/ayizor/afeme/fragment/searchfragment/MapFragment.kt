@@ -16,6 +16,7 @@ import com.ayizor.afeme.api.main.ApiInterface
 import com.ayizor.afeme.api.main.Client
 import com.ayizor.afeme.databinding.FragmentMapBinding
 import com.ayizor.afeme.databinding.ItemBottomSheetMoreBinding
+import com.ayizor.afeme.manager.PrefsManager
 import com.ayizor.afeme.model.CustomClusterItem
 import com.ayizor.afeme.model.post.GetPost
 import com.ayizor.afeme.model.response.GetPostResponse
@@ -104,6 +105,7 @@ class MapFragment : Fragment(), ItemMainMapPostsAdapter.OnPostItemClickListener,
             ) {
                 if (response.isSuccessful && response.code() == 200) {
                     //
+                    Logger.e(TAG, response.body()?.data.toString())
                     postsList = response.body()?.data!!
 
                     for (i in 0 until postsList.size) {
@@ -121,9 +123,26 @@ class MapFragment : Fragment(), ItemMainMapPostsAdapter.OnPostItemClickListener,
                         )
                         clusterManager.addItem(offsetItem)
 
-                        clusterManager.setOnClusterItemClickListener(mClusterItemClickListener);
+                        clusterManager.setOnClusterClickListener {
+
+                            Logger.e(TAG, clusterManager.markerCollection.markers.toString())
+                            return@setOnClusterClickListener true
+                        }
+                        clusterManager.setOnClusterItemClickListener {
+                            binding.bottomSheetSearch.visibility = View.VISIBLE
+                            if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED) {
+                                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                            }
+
+                            it.getTag()?.post_id?.let { it1 -> getPosts(it1) }
+
+                            return@setOnClusterItemClickListener true
+                        }
+
+
                         googleMap.setOnCameraIdleListener(clusterManager);
                         googleMap.setOnMarkerClickListener(clusterManager);
+
                     }
 
 
@@ -145,14 +164,25 @@ class MapFragment : Fragment(), ItemMainMapPostsAdapter.OnPostItemClickListener,
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             }
 
-
 //            val list: ArrayList<GetPost> = ArrayList()
 //            list.add(item.getTag()!!)
             item.getTag()?.post_id?.let { getPosts(it) }
+            Logger.e(TAG, item.getTag().toString())
+            true
+        }
+    var mClusterClickListener: ClusterManager.OnClusterClickListener<CustomClusterItem> =
+        ClusterManager.OnClusterClickListener<CustomClusterItem> { item ->
+            binding.bottomSheetSearch.visibility = View.VISIBLE
+            if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+            val list: ArrayList<GetPost> = ArrayList()
+
+
+
 
             true
         }
-
 
     override fun onPostItemClickListener(id: Int, latitude: String, longitude: String) {
         val intent = Intent(requireContext(), DetailsActivity::class.java)
@@ -172,6 +202,7 @@ class MapFragment : Fragment(), ItemMainMapPostsAdapter.OnPostItemClickListener,
     }
 
     private fun refreshPostsAdapter(filters: ArrayList<GetPost>) {
+        Logger.e(TAG, "filter" + filters.toString())
         val adapter =
             activity?.applicationContext?.let {
                 ItemMainMapPostsAdapter(
@@ -187,7 +218,7 @@ class MapFragment : Fragment(), ItemMainMapPostsAdapter.OnPostItemClickListener,
     }
 
     private fun getPosts(id: Int) {
-        val list: ArrayList<GetPost> = ArrayList()
+
         dataService?.getSinglePost(id)?.enqueue(object : Callback<PostResponse> {
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
@@ -196,8 +227,22 @@ class MapFragment : Fragment(), ItemMainMapPostsAdapter.OnPostItemClickListener,
             ) {
                 if (response.isSuccessful && response.code() == 200) {
 
+
+//                    refreshPostsAdapter(list)
+                    val list: ArrayList<GetPost> = ArrayList()
                     response.body()?.data?.let { list.add(it) }
-                    refreshPostsAdapter(list)
+                    val adapter =
+                        activity?.applicationContext?.let {
+                            ItemMainMapPostsAdapter(
+                                it,
+                                list,
+                                this@MapFragment,
+                                this@MapFragment,
+                                this@MapFragment
+                            )
+                        }
+                    binding.rvPost.adapter = adapter
+                    adapter?.notifyDataSetChanged()
 
                 }
 

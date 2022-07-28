@@ -19,19 +19,25 @@ data class GetPost(
     @SerializedName("sale_id")
     val post_type: PostType? = null,
     @SerializedName("latitude")
-    val post_latitude: String? = "",
+    val post_latitude: String? = null,
     @SerializedName("longitude")
-    val post_longitude: String? = "",
+    val post_longitude: String? = null,
     @SerializedName("price_som")
     val post_price_uzs: String? = null,
     @SerializedName("price_usd")
     val post_price_usd: String? = null,
-    @SerializedName("area")
-    val post_area: Area? = null,
+    @SerializedName("total_area_type")
+    val post_area_type: String? = null,
+    @SerializedName("total_area")
+    val post_total_area: String? = null,
+    @SerializedName("living_area")
+    val post_living_area: String? = null,
+    @SerializedName("kitchen_area")
+    val post_kitchen_area: String? = null,
     @SerializedName("date")
-    val post_built_year: String? = "",
+    val post_built_year: String? = null,
     @SerializedName("room")
-    val post_rooms: String? = "",
+    val post_rooms: String? = null,
     @SerializedName("repair_id")
     val post_repair: Repair? = null,
     @SerializedName("documents")

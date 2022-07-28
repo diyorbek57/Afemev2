@@ -11,6 +11,7 @@ import com.ayizor.afeme.api.main.ApiInterface
 import com.ayizor.afeme.api.main.Client
 import com.ayizor.afeme.databinding.FragmentOffersBinding
 import com.ayizor.afeme.fragment.FavoritesFragment
+import com.ayizor.afeme.manager.PrefsManager
 import com.ayizor.afeme.model.post.GetPost
 
 

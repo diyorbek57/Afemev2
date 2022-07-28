@@ -48,6 +48,7 @@ class MapFragment : Fragment() {
             .showLatLong(false)  // Show Coordinates in the Activity
             .setMapZoom(12.0f)  // Map Zoom Level. Default: 14.0
             .setAddressRequired(true) // Set If return only Coordinates if cannot fetch Address for the coordinates. Default: True
+            .setMarkerDrawable(R.drawable.ic_home_marker) // marker image
             .hideMarkerShadow(true) // Hides the shadow under the map marker. Default: False
             .setFabColor(R.color.bright_blue)
             .setPlaceSearchBar(
@@ -55,7 +56,7 @@ class MapFragment : Fragment() {
                 Constants.GOOGLE_API_KEY
             ) //Activate GooglePlace Search Bar. Default is false/not activated. SearchBar is a chargeable feature by Google
             .onlyCoordinates(true)  //Get only Coordinates from Place Picker
-            .hideLocationButton(true)   //Hide Location Button (Default: false)
+            .hideLocationButton(false)   //Hide Location Button (Default: false)
             .disableMarkerAnimation(true)   //Disable Marker Animation (Default: false)
             .build(requireActivity())
         startActivityForResult(intent, Constants.PLACE_PICKER_REQUEST)
@@ -81,6 +82,7 @@ class MapFragment : Fragment() {
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == Constants.PLACE_PICKER_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 val addressData = data?.getParcelableExtra<AddressData>(Constants.ADDRESS_INTENT)
@@ -104,7 +106,14 @@ class MapFragment : Fragment() {
                 }
             }
         } else {
-            super.onActivityResult(requestCode, resultCode, data)
+            parentFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.enter_from_left,
+                    R.anim.exit_to_right,
+                    R.anim.enter_from_right,
+                    R.anim.exit_to_left,
+                )
+                .replace(R.id.fragment_container_creat_post, BuildningTypeFragment()).commit()
         }
     }
 }

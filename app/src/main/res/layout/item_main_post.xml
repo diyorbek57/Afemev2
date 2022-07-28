@@ -9,9 +9,9 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="270dp"
-        android:layout_margin="10dp"
         android:orientation="horizontal"
         android:paddingStart="30dp"
         android:paddingEnd="30dp" />
@@ -30,10 +30,11 @@
 
             <ImageView
                 android:id="@+id/iv_like"
-                android:src="@drawable/ic_heart_outline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_heart_outline" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,13 +50,14 @@
                     android:textSize="22sp" />
 
                 <TextView
+                    android:layout_marginVertical="5dp"
                     android:id="@+id/tv_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/generalsans_medium"
+                    android:fontFamily="@font/generalsans_regular"
                     android:text="1200000"
                     android:textColor="@color/very_dark_gray_mostly_black"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <TextView
 
@@ -65,20 +67,18 @@
                     android:fontFamily="@font/generalsans_medium"
                     android:text="1200000"
                     android:textColor="@color/very_dark_gray"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
-
+                    android:layout_marginVertical="5dp"
                     android:id="@+id/tv_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/generalsans_medium"
                     android:text="1200000"
                     android:textColor="@color/very_dark_gray"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
-
-
 
 
         </RelativeLayout>
@@ -98,6 +98,8 @@
                 android:layout_marginEnd="3dp"
                 android:layout_weight="4"
                 android:background="@drawable/item_enabled_background"
+                android:elevation="0dp"
+                app:elevation="0dp"
                 android:fontFamily="@font/generalsans_medium"
                 android:text="@string/call"
                 android:textAllCaps="false"

@@ -40,15 +40,15 @@
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tv_currency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/generalsans_semibold"
-            android:text="0 USD"
-            android:textAlignment="center"
-            android:textColor="@color/very_dark_gray_mostly_black"
-            android:textSize="18sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/tv_currency"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/generalsans_semibold"-->
+<!--            android:text="0 USD"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="@color/very_dark_gray_mostly_black"-->
+<!--            android:textSize="18sp" />-->
     </LinearLayout>
 
     <Button

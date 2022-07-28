@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="5dp"
+    android:padding="10dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_users_image"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/test_image"
+        app:shapeAppearanceOverlay="@style/rounded_border_imageView_5" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/iv_users_image"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/generalsans_semibold"
+                android:text="@string/username"
+                android:textColor="@color/very_dark_gray_mostly_black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_last_message_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/generalsans_medium"
+                android:text="12:14"
+                android:textColor="@color/very_dark_gray"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_last_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/generalsans_medium"
+            android:maxLines="2"
+            android:text="@string/dummy_text"
+            android:textColor="@color/very_dark_gray_mostly_black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_post_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/generalsans_medium"
+            android:maxLines="1"
+            android:text="@string/dummy_text"
+            android:textColor="@color/very_dark_gray"
+            android:textSize="14sp" />
+    </LinearLayout>
+</RelativeLayout>

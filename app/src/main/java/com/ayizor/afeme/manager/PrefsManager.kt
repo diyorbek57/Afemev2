@@ -37,9 +37,6 @@ class PrefsManager(context: Context) {
     }
 
 
-
-
-
     fun storeUserRegistered(id: Boolean) {
         val prefsEditor = sharedPreferences!!.edit()
         prefsEditor.putBoolean("user_registered", id)

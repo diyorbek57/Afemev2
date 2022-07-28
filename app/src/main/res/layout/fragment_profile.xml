@@ -57,7 +57,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:padding="5dp">
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -77,12 +76,11 @@
             android:layout_marginHorizontal="15dp"
             android:layout_toEndOf="@id/iv_users_image"
             android:fontFamily="@font/generalsans_medium"
-            android:text="@string/favorites"
             android:textColor="@color/very_dark_gray_mostly_black"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/tv_edit"
+            android:id="@+id/tv_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -116,6 +114,7 @@
             android:src="@drawable/ic_message_three_dots" />
 
         <TextView
+            android:id="@+id/test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"

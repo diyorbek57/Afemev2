@@ -1,6 +1,7 @@
 package com.ayizor.afeme.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.ayizor.afeme.R
+import com.ayizor.afeme.activity.FilterActivity
 import com.ayizor.afeme.databinding.FragmentSearchBinding
 import com.ayizor.afeme.fragment.searchfragment.ListFragment
 import com.ayizor.afeme.fragment.searchfragment.MapFragment
@@ -53,7 +55,10 @@ class SearchFragment : Fragment() {
 
     private fun inits() {
 
-
+        binding.tvFilter.setOnClickListener {
+            val intent = Intent(requireContext(), FilterActivity::class.java)
+            startActivity(intent)
+        }
         binding.swichFragments.setOnClickListener {
 
             val fragInstance: Fragment? =

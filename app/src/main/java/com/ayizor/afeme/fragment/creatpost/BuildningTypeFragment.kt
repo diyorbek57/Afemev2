@@ -14,6 +14,7 @@ import com.ayizor.afeme.api.main.ApiInterface
 import com.ayizor.afeme.api.main.Client
 import com.ayizor.afeme.databinding.FragmentBuildningTypeBinding
 import com.ayizor.afeme.manager.PostPrefsManager
+import com.ayizor.afeme.manager.PrefsManager
 import com.ayizor.afeme.model.Category
 import com.ayizor.afeme.model.response.CategoryResponse
 import retrofit2.Call

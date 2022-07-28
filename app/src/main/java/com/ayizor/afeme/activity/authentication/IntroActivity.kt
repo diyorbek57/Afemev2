@@ -1,14 +1,16 @@
-package com.ayizor.afeme.activity
+package com.ayizor.afeme.activity.authentication
 
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.ayizor.afeme.MainActivity
+import com.ayizor.afeme.activity.MainActivity
 import com.ayizor.afeme.databinding.ActivityIntroBinding
+import com.ayizor.afeme.manager.PrefsManager
 
 class IntroActivity : AppCompatActivity() {
     lateinit var binding: ActivityIntroBinding
@@ -17,8 +19,18 @@ class IntroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityIntroBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
+        if (PrefsManager(this).loadUserRegistered()) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        } else {
+            inits()
+        }
 
-        inits()
 
     }
 
@@ -26,15 +38,15 @@ class IntroActivity : AppCompatActivity() {
 
 
         binding.btnNext.setOnClickListener {
-            if(checkCallPermissions()){
+            if (checkCallPermissions()) {
 
 
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+                val intent = Intent(this, SignInActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         }
     }
-
 
 
     fun checkCallPermissions(): Boolean {

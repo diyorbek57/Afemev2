@@ -2,7 +2,6 @@ package com.ayizor.afeme.api.main
 
 import android.content.Context
 import com.ayizor.afeme.manager.PrefsManager
-
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -22,13 +21,10 @@ class Client {
                     .connectTimeout(40, TimeUnit.SECONDS)
                     .readTimeout(60, TimeUnit.SECONDS)
                     .writeTimeout(60, TimeUnit.SECONDS).addInterceptor(
-                        HeaderInterceptor(
-                            PrefsManager(context).loadUserRegisteredToken().toString()
-                        )
+                        HeaderInterceptor(context)
                     ).addInterceptor(log).build()
                 retrofit = Retrofit.Builder()
                     .baseUrl(Api.BASE_URL).client(client)
-                    .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
             }

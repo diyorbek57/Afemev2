@@ -66,10 +66,13 @@ interface ApiInterface {
     fun register(@Body user: User): Call<MainResponse>
 
     @POST("login")
-    fun login(): Call<User>
+    fun login(
+        @Query("phone") phone: String,
+        @Query("password") password: String
+    ): Call<MainResponse>
 
     @POST("logout")
-    fun logout(): Call<User>
+    fun logout(): Call<MainResponse>
 
 
     @POST("sms")
@@ -112,5 +115,7 @@ interface ApiInterface {
 
 
 //chat
+
+
 
 }

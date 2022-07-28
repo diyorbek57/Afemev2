@@ -11,6 +11,7 @@ import com.ayizor.afeme.api.main.ApiInterface
 import com.ayizor.afeme.api.main.Client
 import com.ayizor.afeme.databinding.FragmentMessagesBinding
 import com.ayizor.afeme.fragment.FavoritesFragment
+import com.ayizor.afeme.manager.PrefsManager
 import com.ayizor.afeme.model.post.GetPost
 import com.ayizor.afeme.model.response.GetPostResponse
 import retrofit2.Call
@@ -21,7 +22,7 @@ import retrofit2.Response
 class MessagesFragment : Fragment() {
 
     lateinit var binding: FragmentMessagesBinding
-    val TAG: String = FavoritesFragment::class.java.simpleName
+    val TAG: String = MessagesFragment::class.java.simpleName
     lateinit var adapter: ItemFavoritesViewPagerAdapter
     var dataService: ApiInterface? = null
     override fun onCreateView(

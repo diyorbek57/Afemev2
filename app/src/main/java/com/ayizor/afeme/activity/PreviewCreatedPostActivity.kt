@@ -59,7 +59,11 @@ class PreviewCreatedPostActivity : BaseActivity() {
         displaySavedDatas()
         getAllBuildingMaterials()
         binding.chipGroupBuildingMaterials.setOnCheckedStateChangeListener { group, checkedIds ->
-            Toast.makeText(this, checkedIds.toString().replace("[", "").replace("]", ""), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                checkedIds.toString().replace("[", "").replace("]", ""),
+                Toast.LENGTH_SHORT
+            ).show()
         }
         binding.btnPublish.setOnClickListener {
             imagesUrls.clear()
@@ -103,6 +107,8 @@ class PreviewCreatedPostActivity : BaseActivity() {
             PostPrefsManager(this@PreviewCreatedPostActivity).loadArea().living_area
         val post_rooms = binding.etRooms.editText?.text.toString()
         // val post_material =
+        val trade = binding.cbTrade.isChecked
+        val mortgage = binding.cbMortgage.isChecked
 
 
         val post = Post(
@@ -130,8 +136,8 @@ class PreviewCreatedPostActivity : BaseActivity() {
             "1",//1
             post_floor,
             post_flat,
-            null,
-            null
+            mortgage,
+            trade
         )
 
         //    Logger.d(TAG, "data: "+dataService!!.createPost(post).request().body)
@@ -201,7 +207,7 @@ class PreviewCreatedPostActivity : BaseActivity() {
                 R.style.CustomChipGroupStyle
             )
             chip.id = i + 1
-            chip.text = item[i].name
+            chip.text = item[i].material_name_en
             chip.isCheckable = true
             chip.setChipDrawable(chipDrawable)
 
@@ -211,24 +217,6 @@ class PreviewCreatedPostActivity : BaseActivity() {
 
     }
 
-    @SuppressLint("ResourceAsColor")
-    private fun addExtraChip(item: ArrayList<BuildingMaterial>) {
-        for (i in 0 until item.size) {
-            val chip = Chip(this)
-            val chipDrawable: ChipDrawable = ChipDrawable.createFromAttributes(
-                this, null, 0,
-                R.style.CustomChipGroupStyle
-            )
-            chip.id = i + 1
-            chip.text = item[i].name
-            chip.isCheckable = true
-            chip.setChipDrawable(chipDrawable)
-
-            binding.chipGroupBuildingMaterials.addView(chip)
-        }
-
-
-    }
 
     private fun getFile(uri: Uri): File {
         val ins = this.contentResolver.openInputStream(uri)

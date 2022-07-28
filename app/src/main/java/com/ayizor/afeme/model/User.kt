@@ -7,9 +7,9 @@ data class User(
     @SerializedName("code")
     val user_code: String? = "",
     @SerializedName("id")
-    val user_id: String? = "",
+    val user_id: String? = null,
     @SerializedName("name")
-    val user_name: String? = "",
+    val user_name: String? = null,
     @SerializedName("lastname")
     val user_last_name: String? = "",
     @SerializedName("image")
@@ -18,8 +18,6 @@ data class User(
     val user_email: String? = "",
     @SerializedName("phone")
     val user_phone_number: String? = "",
-    @SerializedName("passport")
-    val user_passport_number: String? = "",
     @SerializedName("user_type")
     val user_type: String? = "",
     @SerializedName("devays_id")
@@ -34,6 +32,8 @@ data class User(
     val user_city: String? = "",
     @SerializedName("description")
     val user_description: String? = "",
+    @SerializedName("experience")
+    val user_experience: String? = "",
     @SerializedName("posts")
     val user_posts: ArrayList<Post>? = null,
     @SerializedName("favorites")

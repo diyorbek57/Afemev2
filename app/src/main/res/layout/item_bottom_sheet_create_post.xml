@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_bottom_sheet_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="5dp"
+        android:paddingBottom="25dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginVertical="5dp"
+            android:fontFamily="@font/generalsans_semibold"
+            android:text="@string/creating_post"
+            android:textColor="@color/very_dark_gray_mostly_black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginVertical="5dp"
+            android:fontFamily="@font/generalsans_regular"
+            android:text="@string/you_started_filling_out_post_but_were_interrupted_do_you_want_to_continue"
+            android:textColor="@color/very_dark_gray_mostly_black"
+            android:textSize="18sp" />
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btn_continue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:background="@drawable/item_enabled_background"
+                android:fontFamily="@font/generalsans_semibold"
+                android:text="@string/continue_filling"
+                android:textAllCaps="false"
+                android:textSize="17sp" />
+
+            <Button
+                android:id="@+id/btn_restart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:background="@drawable/item_bright_blue_stroke_box"
+                android:fontFamily="@font/generalsans_semibold"
+                android:text="@string/start_again"
+                android:textAllCaps="false"
+                android:textColor="@color/bright_blue"
+                android:textSize="17sp"
+                app:background="@null"
+                app:backgroundTint="@null" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

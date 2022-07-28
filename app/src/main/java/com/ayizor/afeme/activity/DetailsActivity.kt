@@ -15,6 +15,7 @@ import android.view.ViewTreeObserver
 import android.widget.TextView
 import android.widget.TextView.BufferType
 import androidx.core.content.ContextCompat
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import androidx.viewpager2.widget.ViewPager2
 import com.ayizor.afeme.R
 import com.ayizor.afeme.adapter.ItemPostViewPagerAdapter
@@ -41,6 +42,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import kotlin.properties.Delegates
 
+
 class DetailsActivity : BaseActivity(), OnMapReadyCallback {
 
     lateinit var binding: ActivityDetailsBinding
@@ -60,7 +62,8 @@ class DetailsActivity : BaseActivity(), OnMapReadyCallback {
     }
 
     private fun inits() {
-        dataService = Client.getClient(this)?.create(ApiInterface::class.java)
+        dataService = Client.getClient(this)
+            ?.create(ApiInterface::class.java)
         supportMapFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_map_details) as SupportMapFragment
         supportMapFragment.getMapAsync(this)
@@ -69,11 +72,13 @@ class DetailsActivity : BaseActivity(), OnMapReadyCallback {
             id = extras.getInt("POST_ID")
             getPost(id)
         }
-
+        binding.ivTbBack.setOnClickListener {
+            finish()
+        }
         binding.llPlan.setOnClickListener {
             viewPager?.currentItem = viewPagerAdapter.itemCount - 1
         }
-        binding.btnMore.setOnClickListener {
+        binding.ivTbMore.setOnClickListener {
             showSettingsBottomsheet(id)
         }
     }
@@ -127,7 +132,7 @@ class DetailsActivity : BaseActivity(), OnMapReadyCallback {
             binding.tvDescription.text = post.post_description.toString()
             makeTextViewResizable(binding.tvDescription, 3, getString(R.string.view_more), true)
             binding.tvPriceMain.text = post.post_price_usd
-            binding.tvBuindingArea.text = post.post_area?.total_area
+            binding.tvBuindingArea.text = post.post_total_area
             //set -> if language changed
             binding.tvBuindingAppointment.text = post.post_building_type?.category_name_en
             if (!post.post_flat.isNullOrEmpty()) {
@@ -135,7 +140,6 @@ class DetailsActivity : BaseActivity(), OnMapReadyCallback {
             } else {
                 binding.tvBuildingFloor.text = post.post_floor
             }
-
 
 
         }
@@ -153,6 +157,15 @@ class DetailsActivity : BaseActivity(), OnMapReadyCallback {
         viewPager!!.getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
 
 
+
+        viewPager!!.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+
+            if (viewPager!!.currentItem == viewPagerAdapter.itemCount - 1) {
+                binding.llPlan.visibility = View.GONE
+            } else {
+                binding.llPlan.visibility = View.VISIBLE
+            }
+        }
     }
 
     fun showSettingsBottomsheet(post_id: Int) {

@@ -15,7 +15,7 @@ import com.ayizor.afeme.R
 import com.ayizor.afeme.databinding.ItemMainPostBinding
 import com.ayizor.afeme.model.inmodels.Image
 import com.ayizor.afeme.model.post.GetPost
-import com.ayizor.afeme.utils.Logger
+import com.ayizor.afeme.utils.Utils
 
 
 class ItemMainPostsAdapter(
@@ -44,8 +44,39 @@ class ItemMainPostsAdapter(
 
         with(holder) {
             with(postsList[position]) {
-                Logger.i(TAG, postsList.toString())
-                binding.tvPrice.text = post_price_usd
+                val locationName = post_latitude?.let {
+                    post_longitude?.let { it1 ->
+                        Utils.getCoordinateName(
+                            context,
+                            it.toDouble(),
+                            it1.toDouble()
+                        )
+                    }
+                }
+                //price
+                binding.tvPrice.text = post_price_usd?.let { Utils.formatUsd(it) }
+                // info
+                if (!post_flat.isNullOrEmpty()) {
+                    binding.tvInfo.text =
+                        "$post_rooms " + context.getString(R.string.rooms) + ", " + "$post_total_area " + "$post_area_type, " + context.getString(
+                            R.string.floor
+                        ) + ", " + " $post_floor/$post_flat"
+                } else {
+                    binding.tvInfo.text =
+                        "$post_rooms " + context.getString(R.string.rooms) + ", " + "$post_total_area " + "$post_area_type, " + context.getString(
+                            R.string.floor
+                        ) + ", " + " $post_floor"
+                }
+                if (locationName != null) {
+                    val state = locationName.state
+                    val city = locationName.city
+                    if (!city.isNullOrEmpty()) {
+                        binding.tvLocation.text = state + ", " + city
+                    } else {
+                        binding.tvLocation.text = state
+                    }
+                }
+                binding.tvPlaceInfo.visibility = View.GONE
 
                 if (post_images != null) {
                     setupViewPager(post_images)

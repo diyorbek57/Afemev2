@@ -80,9 +80,9 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:layout_marginVertical="5dp"
-                android:background="@color/very_dark_gray" />
+                android:background="@color/very_light_gray_mostly_white" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -314,19 +314,74 @@
                         android:hint="@string/price"
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
-                <!--                <TextView-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:fontFamily="@font/source_sans_pro_semibold"-->
-                <!--                    android:text="@string/additionally"-->
-                <!--                    android:textColor="@color/very_dark_blue_black"-->
-                <!--                    android:textSize="16sp" />-->
-                <!--                <com.google.android.material.chip.ChipGroup-->
-                <!--                    android:id="@+id/chip_group_price_extra"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    app:chipSpacingHorizontal="-15dp"-->
-                <!--                    app:singleSelection="true" />-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/generalsans_semibold"
+                    android:text="@string/additionally"
+                    android:textColor="@color/very_dark_gray_mostly_black"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/cb_trade"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:backgroundTint="@color/bright_blue"
+                            android:buttonTint="@color/bright_blue"
+                            android:checked="true"
+                            android:textColor="@color/bright_blue"
+                            app:backgroundTint="@color/bright_blue" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/generalsans_medium"
+                            android:text="@string/bargaining_is_possible"
+                            android:textColor="@color/very_dark_gray_mostly_black"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/cb_mortgage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:backgroundTint="@color/bright_blue"
+                            android:buttonTint="@color/bright_blue"
+                            android:checked="true"
+                            android:textColor="@color/bright_blue"
+                            app:backgroundTint="@color/bright_blue" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/generalsans_medium"
+                            android:text="@string/possible_mortgage"
+                            android:textColor="@color/very_dark_gray_mostly_black"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -2,6 +2,7 @@ package com.ayizor.afeme.activity
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.ayizor.afeme.R
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -31,29 +33,25 @@ open class BaseActivity : AppCompatActivity() {
 
         val inflater: LayoutInflater? = activity?.layoutInflater
 
-//        if (inflater != null) {
-//            builder?.setView(inflater.inflate(R.layout.item_pregressbar_dialog, null))
-//            builder?.setCancelable(true)
-//            dialog = builder?.create()
-//            dialog?.show()
-//        }
+        if (inflater != null) {
+            builder?.setView(inflater.inflate(R.layout.item_pregressbar_dialog, null))
+            builder?.setCancelable(true)
+            dialog = builder?.create()
+            dialog?.show()
+        }
     }
 
     fun dismissLoading() {
         dialog?.dismiss()
     }
 
-//    fun callMainActivity(context: Context) {
-//        val intent = Intent(context, MainActivity::class.java)
-//        startActivity(intent)
-//        finish()
-//    }
-//
-//    fun callOnBoardingActivity(context: Context) {
-//        val intent = Intent(context, OnBoardingActivity::class.java)
-//        startActivity(intent)
-//        finish()
-//    }
+    fun callMainActivity(context: Context, token: String) {
+        val intent = Intent(context, MainActivity::class.java)
+        intent.putExtra("token", token)
+        startActivity(intent)
+        finish()
+    }
+
 
     fun showTopSnackBar(layoutView: View, text: String) {
         val snack = Snackbar.make(

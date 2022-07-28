@@ -31,14 +31,13 @@ class CreatePostBuildingTypeAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        with(holder.itemViewType) {
+        with(holder) {
             with(categoryList[position]) {
-                binding.tvBuildingTypeName.text = category_name_uz
-                if (category_name_uz != null) {
-                    Glide.with(context)
-                        .load(Api.CATEGORY_IMAGE_URL + category_icon)
-                        .into(binding.ivBuildingTypeIcon)
-                }
+                binding.tvBuildingTypeName.text = category_name_en
+                Glide.with(context)
+                    .load(Api.CATEGORY_IMAGE_URL + category_icon)
+                    .into(binding.ivBuildingTypeIcon)
+
                 binding.cvBuildingType.setOnClickListener {
                     if (category_id != null) {
                         onBuildingTypeItemClickListener.onBuildingTypeItemClickListener(

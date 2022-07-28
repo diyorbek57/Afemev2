@@ -15,6 +15,7 @@ import com.ayizor.afeme.api.main.ApiInterface
 import com.ayizor.afeme.api.main.Client
 import com.ayizor.afeme.databinding.FragmentListBinding
 import com.ayizor.afeme.databinding.ItemBottomSheetMoreBinding
+import com.ayizor.afeme.manager.PrefsManager
 import com.ayizor.afeme.model.post.GetPost
 import com.ayizor.afeme.model.response.GetPostResponse
 import com.ayizor.afeme.model.response.MainResponse
@@ -55,6 +56,8 @@ class ListFragment : Fragment(), ItemMainPostsAdapter.OnPostItemClickListener,
         val adapter =
             activity?.let { ItemMainPostsAdapter(it.applicationContext, filters, this, this, this) }
         binding.rvPosts.adapter = adapter
+        binding.progressBar.visibility = View.GONE
+        binding.llMain.visibility = View.VISIBLE
 
     }
 

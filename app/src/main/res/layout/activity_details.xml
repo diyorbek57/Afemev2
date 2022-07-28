@@ -7,6 +7,8 @@
     android:fitsSystemWindows="true"
     tools:context=".activity.DetailsActivity">
 
+
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -118,11 +120,21 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+
+
+
+<RelativeLayout
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -163,7 +175,6 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/btn_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="10dp"
@@ -442,14 +453,14 @@
 
 
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
-
     <LinearLayout
+        android:id="@+id/ll_contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:paddingVertical="10dp"
         android:weightSum="2">
@@ -483,4 +494,8 @@
             android:textSize="18sp"
             app:backgroundTint="@null" />
     </LinearLayout>
+</RelativeLayout>
+
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
