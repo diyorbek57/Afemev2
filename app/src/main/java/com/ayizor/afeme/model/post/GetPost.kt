@@ -1,7 +1,7 @@
 package com.ayizor.afeme.model.post
 
 import com.ayizor.afeme.model.Category
-import com.ayizor.afeme.model.User
+import com.ayizor.afeme.model.user.User
 import com.ayizor.afeme.model.inmodels.*
 import com.google.gson.annotations.SerializedName
 
@@ -68,6 +68,8 @@ data class GetPost(
     val post_isIpoteka: Boolean? = false,
     @SerializedName("trade")
     val post_isTradable: Boolean? = false,
+    @SerializedName("solt")
+    val post_isAvailable: String? = null,
     @SerializedName("view")
     val post_views: String? = "",
     @SerializedName("likecount")

@@ -131,7 +131,7 @@ class DetailsActivity : BaseActivity(), OnMapReadyCallback {
 
             binding.tvDescription.text = post.post_description.toString()
             makeTextViewResizable(binding.tvDescription, 3, getString(R.string.view_more), true)
-            binding.tvPriceMain.text = post.post_price_usd
+            binding.tvPriceMain.text = "$ " + post.post_price_usd?.let { Utils.formatUsd(it) }
             binding.tvBuindingArea.text = post.post_total_area
             //set -> if language changed
             binding.tvBuindingAppointment.text = post.post_building_type?.category_name_en

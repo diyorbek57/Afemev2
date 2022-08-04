@@ -9,7 +9,7 @@ import com.ayizor.afeme.api.main.ApiInterface
 import com.ayizor.afeme.api.main.Client
 import com.ayizor.afeme.databinding.ActivityCodeConfirmBinding
 import com.ayizor.afeme.manager.PrefsManager
-import com.ayizor.afeme.model.User
+import com.ayizor.afeme.model.user.User
 import com.ayizor.afeme.model.response.MainResponse
 import com.ayizor.afeme.utils.Logger
 import com.ayizor.afeme.utils.Utils
@@ -66,6 +66,7 @@ class CodeConfirmActivity : BaseActivity() {
                         null,
                         user_phone_number,
                         user_account_type,
+                        null,
                         user_device_id,
                         user_device_type,
                         user_password,
@@ -96,10 +97,7 @@ class CodeConfirmActivity : BaseActivity() {
                     if (response.body()?.status == true) {
                         PrefsManager(this@CodeConfirmActivity).storeUserRegisteredToken(response.body()?.data.toString())
                         PrefsManager(this@CodeConfirmActivity).storeUserRegistered(response.body()?.status!!)
-                        callMainActivity(
-                            this@CodeConfirmActivity,
-                            response.body()!!.data.toString()
-                        )
+                        callMainActivity(this@CodeConfirmActivity)
                         // dismissLoading()
                     } else {
                         showTopSnackBar(

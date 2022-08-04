@@ -58,7 +58,7 @@ class SignInActivity : BaseActivity() {
                             )
                         }
                         PrefsManager(this@SignInActivity).storeUserRegistered(response.body()?.status!!)
-                        callMainActivity(this@SignInActivity, response.body()?.data.toString())
+                        callMainActivity(this@SignInActivity)
 
 
                         // dismissLoading()

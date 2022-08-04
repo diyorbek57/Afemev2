@@ -57,18 +57,14 @@ class PrefsManager(context: Context) {
     fun loadUserRegisteredToken(): String? {
         return sharedPreferences!!.getString("user_registered_token", "")
     }
-    fun storeUserCurrentLocation(location: LatLng) {
-        val gson = Gson()
-        val json = gson.toJson(location)
+    fun storeUserId(id: String?) {
         val prefsEditor = sharedPreferences!!.edit()
-        prefsEditor.putString("current_location", json)
+        prefsEditor.putString("user_id", id)
         prefsEditor.apply()
     }
-    fun loadUserCurrentLocation(): LatLng {
-        val gson = Gson()
-        val json: String? = sharedPreferences?.getString("current_location", null)
-        val type = object : TypeToken<LatLng>() {}.type
-        return gson.fromJson(json, type)
+
+    fun loadUserId(): String? {
+        return sharedPreferences!!.getString("user_id", "")
     }
     fun storeSearchFragment(fragment_name: String) {
         val prefsEditor = sharedPreferences!!.edit()

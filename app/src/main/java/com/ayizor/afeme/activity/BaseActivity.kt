@@ -45,9 +45,8 @@ open class BaseActivity : AppCompatActivity() {
         dialog?.dismiss()
     }
 
-    fun callMainActivity(context: Context, token: String) {
+    fun callMainActivity(context: Context) {
         val intent = Intent(context, MainActivity::class.java)
-        intent.putExtra("token", token)
         startActivity(intent)
         finish()
     }

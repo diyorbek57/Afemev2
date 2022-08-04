@@ -1,7 +1,6 @@
 package com.ayizor.afeme.model.response
 
-import com.ayizor.afeme.model.Category
-import com.ayizor.afeme.model.User
+import com.ayizor.afeme.model.user.User
 
 data class UsersResponse (
         val status: Boolean? = null,

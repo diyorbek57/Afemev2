@@ -1,7 +1,8 @@
 package com.ayizor.afeme.api.main
 
 
-import com.ayizor.afeme.model.User
+import com.ayizor.afeme.model.user.User
+import com.ayizor.afeme.model.chat.inmodel.ChatResponseItem
 import com.ayizor.afeme.model.post.Post
 import com.ayizor.afeme.model.response.*
 import okhttp3.MultipartBody
@@ -114,8 +115,12 @@ interface ApiInterface {
     fun getRegions(): Call<RegionsResponse>
 
 
-//chat
+    //chat
+    @GET("message")
+    fun getMessages(): Call<MessageResponse>
 
+    @GET("message/{id}")
+    fun getAllMessages(@Path("id") id: String): Call<ArrayList<ChatResponseItem>>
 
 
 }

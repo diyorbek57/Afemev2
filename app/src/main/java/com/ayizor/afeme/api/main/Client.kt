@@ -24,14 +24,11 @@ class Client {
                         HeaderInterceptor(context)
                     ).addInterceptor(log).build()
                 retrofit = Retrofit.Builder()
-                    .baseUrl(Api.BASE_URL).client(client)
+                    .baseUrl(Api.BASE_URL).client(client).addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
             }
             return retrofit
         }
-
-
     }
-
 }

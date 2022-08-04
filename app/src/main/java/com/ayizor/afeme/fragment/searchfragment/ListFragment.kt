@@ -15,7 +15,6 @@ import com.ayizor.afeme.api.main.ApiInterface
 import com.ayizor.afeme.api.main.Client
 import com.ayizor.afeme.databinding.FragmentListBinding
 import com.ayizor.afeme.databinding.ItemBottomSheetMoreBinding
-import com.ayizor.afeme.manager.PrefsManager
 import com.ayizor.afeme.model.post.GetPost
 import com.ayizor.afeme.model.response.GetPostResponse
 import com.ayizor.afeme.model.response.MainResponse
@@ -23,6 +22,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class ListFragment : Fragment(), ItemMainPostsAdapter.OnPostItemClickListener,
     ItemMainPostsAdapter.OnActionsButtonClickListener,
@@ -49,7 +49,22 @@ class ListFragment : Fragment(), ItemMainPostsAdapter.OnPostItemClickListener,
             LinearLayoutManager.VERTICAL,
             false
         )
-        getPosts()
+        if (binding.svRent.isChecked) {
+            getPosts()
+        } else {
+            getPostsWithoutRents()
+        }
+        binding.svRent.setOnCheckedChangeListener { buttonView, isChecked ->
+            binding.progressBar.visibility = View.VISIBLE
+            binding.llMain.visibility = View.GONE
+            if (isChecked) {
+                getPosts()
+            } else {
+                getPostsWithoutRents()
+            }
+        }
+
+
     }
 
     private fun refreshPostsAdapter(filters: ArrayList<GetPost>) {
@@ -91,25 +106,52 @@ class ListFragment : Fragment(), ItemMainPostsAdapter.OnPostItemClickListener,
     }
 
     private fun getPosts() {
-        dataService?.getAllPosts()?.enqueue(object : Callback<GetPostResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(
-                call: Call<GetPostResponse>,
-                response: Response<GetPostResponse>
-            ) {
-                if (response.isSuccessful && response.code() == 200) {
+        dataService?.searchPosts(null, 5, null, null, 15, null, null, null, null, null)
+            ?.enqueue(object : Callback<GetPostResponse> {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onResponse(
+                    call: Call<GetPostResponse>,
+                    response: Response<GetPostResponse>
+                ) {
+                    if (response.isSuccessful && response.code() == 200) {
 
-                    response.body()?.data?.let { refreshPostsAdapter(it) }
+                        response.body()?.data?.let { refreshPostsAdapter(it) }
 
+
+                    }
 
                 }
 
-            }
+                override fun onFailure(call: Call<GetPostResponse>, t: Throwable) {
+                    t.stackTraceToString()
+                }
 
-            override fun onFailure(call: Call<GetPostResponse>, t: Throwable) {
-            }
+            })
 
-        })
+    }
+
+    private fun getPostsWithoutRents() {
+        dataService?.searchPosts(null, null, null, null, 15, null, null, null, null, null)
+            ?.enqueue(object : Callback<GetPostResponse> {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onResponse(
+                    call: Call<GetPostResponse>,
+                    response: Response<GetPostResponse>
+                ) {
+                    if (response.isSuccessful && response.code() == 200) {
+
+                        response.body()?.data?.let { refreshPostsAdapter(it) }
+
+
+                    }
+
+                }
+
+                override fun onFailure(call: Call<GetPostResponse>, t: Throwable) {
+                    t.stackTraceToString()
+                }
+
+            })
 
     }
 

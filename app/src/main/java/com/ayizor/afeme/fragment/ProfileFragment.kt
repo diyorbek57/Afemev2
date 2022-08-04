@@ -13,9 +13,7 @@ import com.ayizor.afeme.api.main.Client
 import com.ayizor.afeme.databinding.FragmentProfileBinding
 import com.ayizor.afeme.manager.PrefsManager
 import com.ayizor.afeme.manager.UserPrefsManager
-import com.ayizor.afeme.model.User
 import com.ayizor.afeme.model.response.MainResponse
-import com.ayizor.afeme.model.response.UserResponse
 import com.ayizor.afeme.utils.Logger
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,17 +31,24 @@ class ProfileFragment : Fragment() {
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         inits()
+
         return binding.root
     }
 
     private fun inits() {
+        binding.tvFullname.text = UserPrefsManager(requireContext()).loadUserFirstname().toString() + " " + UserPrefsManager(
+            requireContext()
+        ).loadUserLastname().toString()
+        Logger.e(TAG,UserPrefsManager(requireContext()).loadUserFirstname().toString() + " " + UserPrefsManager(
+            requireContext()
+        ).loadUserLastname().toString())
         dataService = Client.getClient(requireContext())?.create(ApiInterface::class.java)
-        getCurrentUser()
         binding.llSetting.setOnClickListener {
             val intent = Intent(requireContext(), SettingsActivity::class.java)
             startActivity(intent)
         }
         binding.tvLogout.setOnClickListener {
+
             logout()
         }
     }
@@ -71,31 +76,10 @@ class ProfileFragment : Fragment() {
         })
     }
 
-    private fun displayUserDatas(user: User) {
-        Logger.e(TAG, user.toString())
+    private fun displayUserDatas() {
+
 
     }
 
-    private fun getCurrentUser() {
-        dataService?.getCurrentUser()?.enqueue(object : Callback<UserResponse> {
-
-            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
-
-
-                binding.tvFullname.setText(response.body()?.data?.user_name.toString())
-                binding.tvFullname.setText("test")
-          //      binding.test.text = response.body()?.data?.user_name
-              //  Logger.e(TAG, response.body()!!.data.toString())
-///                response.body()!!.data?.let { displayUserDatas(it) }
-
-
-            }
-
-            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-
-            }
-
-        })
-    }
 
 }

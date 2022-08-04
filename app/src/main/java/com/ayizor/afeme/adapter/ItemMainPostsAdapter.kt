@@ -44,17 +44,34 @@ class ItemMainPostsAdapter(
 
         with(holder) {
             with(postsList[position]) {
-                val locationName = post_latitude?.let {
-                    post_longitude?.let { it1 ->
-                        Utils.getCoordinateName(
-                            context,
-                            it.toDouble(),
-                            it1.toDouble()
-                        )
+
+
+                try {
+                    val locationName = post_latitude?.let {
+                        post_longitude?.let { it1 ->
+                            Utils.getCoordinateName(
+                                context,
+                                it.toDouble(),
+                                it1.toDouble()
+                            )
+                        }
                     }
+                    if (locationName != null) {
+                        val state = locationName.state
+                        val city = locationName.city
+                        if (!city.isNullOrEmpty()) {
+                            binding.tvLocation.text = state + ", " + city
+                        } else {
+                            binding.tvLocation.text = state
+                        }
+                    }
+                } catch (e: IndexOutOfBoundsException) {
+
                 }
+
+
                 //price
-                binding.tvPrice.text = post_price_usd?.let { Utils.formatUsd(it) }
+                binding.tvPrice.text = "$ " + post_price_usd?.let { Utils.formatUsd(it) }
                 // info
                 if (!post_flat.isNullOrEmpty()) {
                     binding.tvInfo.text =
@@ -67,15 +84,7 @@ class ItemMainPostsAdapter(
                             R.string.floor
                         ) + ", " + " $post_floor"
                 }
-                if (locationName != null) {
-                    val state = locationName.state
-                    val city = locationName.city
-                    if (!city.isNullOrEmpty()) {
-                        binding.tvLocation.text = state + ", " + city
-                    } else {
-                        binding.tvLocation.text = state
-                    }
-                }
+
                 binding.tvPlaceInfo.visibility = View.GONE
 
                 if (post_images != null) {
@@ -143,6 +152,7 @@ class ItemMainPostsAdapter(
                 }
             }
 
+
         }
 
     }
@@ -172,7 +182,7 @@ class ItemMainPostsAdapter(
 
 
     override fun getItemCount(): Int {
-        return postsList.size - 1
+        return postsList.size
     }
 
 

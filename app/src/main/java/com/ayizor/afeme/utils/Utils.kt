@@ -10,6 +10,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.provider.Settings
+import android.text.format.DateFormat
+import android.text.format.DateUtils
 import android.util.DisplayMetrics
 import android.view.Window
 import android.view.WindowManager
@@ -21,6 +23,8 @@ import com.ayizor.afeme.model.CustomLocation
 import com.ayizor.afeme.model.ScreenSize
 import java.text.DecimalFormat
 import java.text.NumberFormat
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -111,20 +115,26 @@ object Utils {
         }
     }
 
-    fun getCoordinateName(context: Context, latitude: Double, longitude: Double): CustomLocation {
-        val geocoder = Geocoder(context, Locale.getDefault());
-        val addresses = geocoder.getFromLocation(latitude, longitude, 1);
-        val address =
-            addresses[0].getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+    fun getCoordinateName(context: Context, latitude: Double, longitude: Double): CustomLocation? {
+        try {
 
-        val city = addresses[0].locality
-        val state = addresses[0].adminArea
-        val country = addresses[0].countryName
-        val postalCode = addresses[0].postalCode
-        val knownName = addresses[0].featureName // Only if available else return NULL
 
-        return CustomLocation(city, state, country, postalCode, knownName)
+            val geocoder = Geocoder(context, Locale.getDefault());
+            val addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            val address =
+                addresses[0].getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
 
+            val city = addresses[0].locality
+            val state = addresses[0].adminArea
+            val country = addresses[0].countryName
+            val postalCode = addresses[0].postalCode
+            val knownName = addresses[0].featureName // Only if available else return NULL
+
+            return CustomLocation(city, state, country, postalCode, knownName)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return null
+        }
     }
 
     fun replaceWords(word: String, replace: String?, newWord: String): String? {
@@ -159,6 +169,31 @@ object Utils {
             ""
         }
 
+    }
+
+    fun getTimeAgo(created_at: String): String {
+        val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
+        return try {
+            val time: Long = sdf.parse(created_at)!!.time
+            val now = System.currentTimeMillis()
+            val ago = DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS)
+            ago.toString()
+        } catch (e: ParseException) {
+            e.printStackTrace()
+            ""
+        }
+    }
+
+    fun formatingDateAsTime(created_at: String): String {
+        val df = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'")
+        return try {
+            val date = df.parse(created_at)
+            val dateString = DateFormat.format("HH:mm", date).toString()
+            dateString.toString()
+        } catch (e: ParseException) {
+            e.printStackTrace()
+            ""
+        }
     }
 
 }
