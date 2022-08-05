@@ -89,7 +89,7 @@ class CodeConfirmActivity : BaseActivity() {
     }
 
     private fun createUser(user: User) {
-        //showLoading(this@CodeConfirmActivity)
+        showLoading(this@CodeConfirmActivity)
         dataService?.register(user)?.enqueue(object : Callback<MainResponse> {
 
             override fun onResponse(call: Call<MainResponse>, response: Response<MainResponse>) {
@@ -98,7 +98,7 @@ class CodeConfirmActivity : BaseActivity() {
                         PrefsManager(this@CodeConfirmActivity).storeUserRegisteredToken(response.body()?.data.toString())
                         PrefsManager(this@CodeConfirmActivity).storeUserRegistered(response.body()?.status!!)
                         callMainActivity(this@CodeConfirmActivity)
-                        // dismissLoading()
+                         dismissLoading()
                     } else {
                         showTopSnackBar(
                             binding.mainLayoutConfirmCode,

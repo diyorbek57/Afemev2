@@ -11,6 +11,7 @@ import com.ayizor.afeme.databinding.ItemMainPostViewPagerBinding
 import com.ayizor.afeme.model.inmodels.Image
 import com.ayizor.afeme.model.post.GetPost
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 
 class ItemPostViewPagerAdapter(
@@ -32,6 +33,7 @@ class ItemPostViewPagerAdapter(
             with(postsList[position]) {
                     Glide.with(context)
                         .load(image_url).error(R.drawable.image_place_holder)
+                        .transition(DrawableTransitionOptions.withCrossFade())
                         .into(binding.ivViewpager)
 
 

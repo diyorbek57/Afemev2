@@ -7,7 +7,7 @@ class Api {
         val USER_IMAGE_URL = "https://ali98.uz/public/admin2/user/"
         val CATEGORY_IMAGE_URL = "https://ali98.uz/public/admin2/categories/"
         val SALES_IMAGE_URL = "https://ali98.uz/public/admin2/sales/"
-        val BASE_URL = "http://ali98.uz/api/"
+        val BASE_URL = "https://ali98.uz/api/"
     }
 
 }

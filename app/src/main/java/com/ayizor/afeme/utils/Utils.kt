@@ -171,6 +171,15 @@ object Utils {
 
     }
 
+    fun isValidPassword(password: String?) : Boolean {
+        password?.let {
+            val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$"
+            val passwordMatcher = Regex(passwordPattern)
+
+            return passwordMatcher.find(password) != null
+        } ?: return false
+    }
+
     fun getTimeAgo(created_at: String): String {
         val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
         return try {

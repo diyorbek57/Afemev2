@@ -35,7 +35,7 @@ open class BaseActivity : AppCompatActivity() {
 
         if (inflater != null) {
             builder?.setView(inflater.inflate(R.layout.item_pregressbar_dialog, null))
-            builder?.setCancelable(true)
+            builder?.setCancelable(false)
             dialog = builder?.create()
             dialog?.show()
         }

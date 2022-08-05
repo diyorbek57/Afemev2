@@ -106,7 +106,7 @@ class ListFragment : Fragment(), ItemMainPostsAdapter.OnPostItemClickListener,
     }
 
     private fun getPosts() {
-        dataService?.searchPosts(null, 5, null, null, 15, null, null, null, null, null)
+        dataService?.searchPosts(null, null, null, null, 15, null, null, null, null, null)
             ?.enqueue(object : Callback<GetPostResponse> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
@@ -131,7 +131,7 @@ class ListFragment : Fragment(), ItemMainPostsAdapter.OnPostItemClickListener,
     }
 
     private fun getPostsWithoutRents() {
-        dataService?.searchPosts(null, null, null, null, 15, null, null, null, null, null)
+        dataService?.searchPosts(null, 5, null, null, 15, null, null, null, null, null)
             ?.enqueue(object : Callback<GetPostResponse> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(

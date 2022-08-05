@@ -1,7 +1,9 @@
 package com.ayizor.afeme.activity.authentication
 
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import com.ayizor.afeme.R
 import com.ayizor.afeme.activity.BaseActivity
 import com.ayizor.afeme.api.main.ApiInterface
 import com.ayizor.afeme.api.main.Client
@@ -26,6 +28,7 @@ class SignUpActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.white)));
         inits()
     }
 

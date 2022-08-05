@@ -138,5 +138,7 @@
     <string name="from">From</string>
     <string name="to">To</string>
     <string name="reset">Reset</string>
+    <string name="hello_there_welcome_back">Hello there, Welcome Back</string>
+    <string name="welcome">Welcome</string>
 
 </resources>
